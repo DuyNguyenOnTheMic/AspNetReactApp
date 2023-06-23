@@ -42,7 +42,10 @@
     "typescript": "^5.1.3"
   },
   "overrides": {
-    "autoprefixer": "10.4.5"
+    "autoprefixer": "10.4.5",
+    "react-scripts": {
+      "typescript": "^5"
+    }
   },
   "resolutions": {
     "css-what": "^5.0.1",
