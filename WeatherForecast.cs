@@ -2,7 +2,7 @@ namespace AspNetReactApp
 {
     public class WeatherForecast
     {
-        public DateOnly Date { get; set; }
+        public required string Date { get; set; }
 
         public int TemperatureC { get; set; }
 
