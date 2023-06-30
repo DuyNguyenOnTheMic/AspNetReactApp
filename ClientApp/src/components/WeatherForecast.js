@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
 
-export class FetchData extends Component {
-    static displayName = FetchData.name;
+export class WeatherForecast extends Component {
+    static displayName = WeatherForecast.name;
 
     constructor(props) {
         super(props);
@@ -41,7 +41,7 @@ export class FetchData extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : FetchData.renderForecastsTable(this.state.forecasts);
+            : WeatherForecast.renderForecastsTable(this.state.forecasts);
 
         return (
             <div>
