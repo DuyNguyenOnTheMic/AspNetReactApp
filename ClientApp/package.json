@@ -46,10 +46,7 @@
     "overrides": {
         "autoprefixer": "10.4.5",
         "@svgr/webpack": "$@svgr/webpack",
-        "semver": "7.5.3",
-        "react-scripts": {
-            "typescript": "^5"
-        }
+        "semver": "7.5.3"
     },
     "resolutions": {
         "css-what": "^5.0.1",
