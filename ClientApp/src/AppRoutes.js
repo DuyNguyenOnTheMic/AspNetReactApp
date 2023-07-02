@@ -1,23 +1,23 @@
-import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
-import { Counter } from "./components/Counter";
-import { WeatherForecast } from "./components/WeatherForecast";
-import { Home } from "./components/Home";
+import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
+import { Counter } from './components/Counter'
+import { WeatherForecast } from './components/WeatherForecast'
+import { Home } from './components/Home'
 
 const AppRoutes = [
     {
         index: true,
-        element: <Home />
+        element: <Home />,
     },
     {
         path: '/counter',
-        element: <Counter />
+        element: <Counter />,
     },
     {
         path: '/weather-forecast',
         requireAuth: true,
-        element: <WeatherForecast />
+        element: <WeatherForecast />,
     },
-    ...ApiAuthorzationRoutes
-];
+    ...ApiAuthorzationRoutes,
+]
 
-export default AppRoutes;
+export default AppRoutes
