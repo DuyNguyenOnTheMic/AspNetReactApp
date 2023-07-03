@@ -44,9 +44,11 @@
         "typescript": "^5.1.6"
     },
     "overrides": {
-        "autoprefixer": "10.4.5",
         "@svgr/webpack": "$@svgr/webpack",
-        "semver": "7.5.3"
+        "semver": "7.5.3",
+        "react-scripts": {
+            "typescript": "^5"
+        }
     },
     "resolutions": {
         "css-what": "^5.0.1",
