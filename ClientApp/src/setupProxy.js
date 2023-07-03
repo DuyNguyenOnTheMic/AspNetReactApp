@@ -16,6 +16,7 @@ const context = [
     '/connect',
     '/ApplyDatabaseMigrations',
     '/_framework',
+    '/api'
 ]
 
 const onError = (err, req, resp, target) => {

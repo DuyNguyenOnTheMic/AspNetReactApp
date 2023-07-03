@@ -14,10 +14,11 @@ namespace AspNetReactApp.Data.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Course = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    Course = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {

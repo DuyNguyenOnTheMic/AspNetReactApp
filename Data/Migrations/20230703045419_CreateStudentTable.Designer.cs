@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetReactApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230629093536_CreateStudentTable")]
+    [Migration("20230703045419_CreateStudentTable")]
     partial class CreateStudentTable
     {
         /// <inheritdoc />
@@ -92,11 +92,12 @@ namespace AspNetReactApp.Data.Migrations
 
             modelBuilder.Entity("AspNetReactApp.Models.Student", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<string>("Course")
                         .IsRequired()
@@ -107,6 +108,10 @@ namespace AspNetReactApp.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
