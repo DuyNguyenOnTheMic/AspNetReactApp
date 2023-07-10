@@ -22,10 +22,6 @@ namespace AspNetReactApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            if (_context.Students == null)
-            {
-                return NotFound();
-            }
             return await _context.Students.ToListAsync();
         }
 
@@ -33,10 +29,6 @@ namespace AspNetReactApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(string id)
         {
-            if (_context.Students == null)
-            {
-                return NotFound();
-            }
             var student = await _context.Students.FindAsync(id);
 
             if (student == null)
@@ -83,10 +75,6 @@ namespace AspNetReactApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent([Bind("Id,Name,Age,Course,Note")] Student student)
         {
-            if (_context.Students == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Students' is null.");
-            }
             _context.Students.Add(student);
             try
             {
@@ -104,17 +92,13 @@ namespace AspNetReactApp.Controllers
                 }
             }
 
-            return CreatedAtAction("GetStudent", new { id = student.Id }, student);
+            return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
         }
 
         // DELETE: api/Students/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
-            if (_context.Students == null)
-            {
-                return NotFound();
-            }
             var student = await _context.Students.FindAsync(id);
             if (student == null)
             {
@@ -129,7 +113,7 @@ namespace AspNetReactApp.Controllers
 
         private bool StudentExists(string id)
         {
-            return (_context.Students?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Students.Any(e => e.Id == id);
         }
     }
 }
