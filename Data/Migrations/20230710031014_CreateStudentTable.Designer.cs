@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetReactApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230703045419_CreateStudentTable")]
+    [Migration("20230710031014_CreateStudentTable")]
     partial class CreateStudentTable
     {
         /// <inheritdoc />
