@@ -15,7 +15,7 @@
     "react-scripts": "^5.0.1",
     "reactstrap": "^9.2.0",
     "rimraf": "^5.0.1",
-    "web-vitals": "^3.3.2",
+    "web-vitals": "^3.4.0",
     "workbox-background-sync": "^7.0.0",
     "workbox-broadcast-update": "^7.0.0",
     "workbox-cacheable-response": "^7.0.0",
@@ -45,7 +45,7 @@
   },
   "overrides": {
     "@svgr/webpack": "$@svgr/webpack",
-    "semver": "7.5.3",
+    "semver": "7.5.4",
     "react-scripts": {
       "typescript": "^5"
     }
