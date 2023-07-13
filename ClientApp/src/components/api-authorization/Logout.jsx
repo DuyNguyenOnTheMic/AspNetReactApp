@@ -1,12 +1,19 @@
+import PropTypes from 'prop-types'
 import { Component } from 'react'
-import authService from './AuthorizeService'
-import { AuthenticationResultStatus } from './AuthorizeService'
-import { QueryParameterNames, LogoutActions, ApplicationPaths } from './ApiAuthorizationConstants'
+import { ApplicationPaths, LogoutActions, QueryParameterNames } from './ApiAuthorizationConstants'
+import authService, { AuthenticationResultStatus } from './AuthorizeService'
 
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
 // user clicks on the logout button on the LoginMenu component.
+
 export class Logout extends Component {
+  static get propTypes() {
+    return {
+      action: PropTypes.string
+    }
+  }
+
   constructor(props) {
     super(props)
 

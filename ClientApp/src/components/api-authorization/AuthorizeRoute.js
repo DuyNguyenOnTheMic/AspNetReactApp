@@ -1,9 +1,17 @@
+import PropTypes from 'prop-types'
 import { Component } from 'react'
 import { Navigate } from 'react-router-dom'
 import { ApplicationPaths, QueryParameterNames } from './ApiAuthorizationConstants'
 import authService from './AuthorizeService'
 
 export default class AuthorizeRoute extends Component {
+  static get propTypes() {
+    return {
+      path: PropTypes.string,
+      element: PropTypes.element
+    }
+  }
+
   constructor(props) {
     super(props)
 
