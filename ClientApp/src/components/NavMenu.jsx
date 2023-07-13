@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap'
 import { Link, NavLink } from 'react-router-dom'
 import { LoginMenu } from './api-authorization/LoginMenu'
@@ -54,6 +54,11 @@ export class NavMenu extends Component {
               <NavItem>
                 <NavLink className='nav-link text-dark' to='/student-management'>
                   Student Management
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className='nav-link text-dark' to='/swagger' target='_blank' rel='noreferrer'>
+                  Swagger
                 </NavLink>
               </NavItem>
               <LoginMenu />
