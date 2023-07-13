@@ -1,4 +1,3 @@
-import React from 'react'
 import { Component } from 'react'
 import authService from './AuthorizeService'
 import { AuthenticationResultStatus } from './AuthorizeService'
@@ -22,7 +21,7 @@ export class Logout extends Component {
     const action = this.props.action
     switch (action) {
       case LogoutActions.Logout:
-        if (!!window.history.state.usr.local) {
+        if (window.history.state.usr.local) {
           this.logout(this.getReturnUrl())
         } else {
           // This prevents regular links to <app>/authentication/logout from triggering a logout
@@ -53,7 +52,7 @@ export class Logout extends Component {
     if (!isReady) {
       return <div></div>
     }
-    if (!!message) {
+    if (message) {
       return <div>{message}</div>
     } else {
       const action = this.props.action
@@ -79,7 +78,7 @@ export class Logout extends Component {
         case AuthenticationResultStatus.Redirect:
           break
         case AuthenticationResultStatus.Success:
-          await this.navigateToReturnUrl(returnUrl)
+          this.navigateToReturnUrl(returnUrl)
           break
         case AuthenticationResultStatus.Fail:
           this.setState({ message: result.message })
@@ -101,7 +100,7 @@ export class Logout extends Component {
         // is when we are doing a redirect sign in flow.
         throw new Error('Should not redirect.')
       case AuthenticationResultStatus.Success:
-        await this.navigateToReturnUrl(this.getReturnUrl(result.state))
+        this.navigateToReturnUrl(this.getReturnUrl(result.state))
         break
       case AuthenticationResultStatus.Fail:
         this.setState({ message: result.message })

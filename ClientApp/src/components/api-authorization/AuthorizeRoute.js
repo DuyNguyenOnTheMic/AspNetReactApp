@@ -1,4 +1,3 @@
-import React from 'react'
 import { Component } from 'react'
 import { Navigate } from 'react-router-dom'
 import { ApplicationPaths, QueryParameterNames } from './ApiAuthorizationConstants'

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react'
 import { NavItem, NavLink } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import authService from './AuthorizeService'

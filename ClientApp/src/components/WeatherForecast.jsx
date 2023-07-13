@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import authService from './api-authorization/AuthorizeService'
 
 export class WeatherForecast extends Component {

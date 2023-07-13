@@ -1,4 +1,3 @@
-import React from 'react'
 import { Component } from 'react'
 import authService from './AuthorizeService'
 import { AuthenticationResultStatus } from './AuthorizeService'
@@ -46,7 +45,7 @@ export class Login extends Component {
     const action = this.props.action
     const { message } = this.state
 
-    if (!!message) {
+    if (message) {
       return <div>{message}</div>
     } else {
       switch (action) {
@@ -70,7 +69,7 @@ export class Login extends Component {
       case AuthenticationResultStatus.Redirect:
         break
       case AuthenticationResultStatus.Success:
-        await this.navigateToReturnUrl(returnUrl)
+        this.navigateToReturnUrl(returnUrl)
         break
       case AuthenticationResultStatus.Fail:
         this.setState({ message: result.message })
@@ -89,7 +88,7 @@ export class Login extends Component {
         // is when we are doing a redirect sign in flow.
         throw new Error('Should not redirect.')
       case AuthenticationResultStatus.Success:
-        await this.navigateToReturnUrl(this.getReturnUrl(result.state))
+        this.navigateToReturnUrl(this.getReturnUrl(result.state))
         break
       case AuthenticationResultStatus.Fail:
         this.setState({ message: result.message })
