@@ -1,7 +1,7 @@
-import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
 import { Counter } from './components/Counter'
-import { WeatherForecast } from './components/WeatherForecast'
 import { Home } from './components/Home'
+import { WeatherForecast } from './components/WeatherForecast'
+import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
 
 const AppRoutes = [
   {

@@ -1,8 +1,8 @@
 import { Component } from 'react'
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap'
 import { Link, NavLink } from 'react-router-dom'
-import { LoginMenu } from './api-authorization/LoginMenu'
+import { Collapse, NavItem, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap'
 import './NavMenu.css'
+import { LoginMenu } from './api-authorization/LoginMenu'
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name

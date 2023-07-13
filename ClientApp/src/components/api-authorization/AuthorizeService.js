@@ -1,5 +1,5 @@
 import { UserManager, WebStorageStateStore } from 'oidc-client'
-import { ApplicationPaths, ApplicationName } from './ApiAuthorizationConstants'
+import { ApplicationName, ApplicationPaths } from './ApiAuthorizationConstants'
 
 export class AuthorizeService {
   _callbacks = []

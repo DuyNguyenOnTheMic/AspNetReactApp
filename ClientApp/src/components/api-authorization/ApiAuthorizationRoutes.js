@@ -1,6 +1,6 @@
+import { ApplicationPaths, LoginActions, LogoutActions } from './ApiAuthorizationConstants'
 import { Login } from './Login'
 import { Logout } from './Logout'
-import { ApplicationPaths, LoginActions, LogoutActions } from './ApiAuthorizationConstants'
 
 const ApiAuthorizationRoutes = [
   {
