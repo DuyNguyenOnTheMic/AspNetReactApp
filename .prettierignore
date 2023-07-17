@@ -1,3 +1,11 @@
 # Ignore artifacts:
 build
 coverage
+
+# Ignore all minified files:
+**/*.min.*
+
+# Ignore files built by Visual Studio
+**/bin
+**/obj
+**/packages
