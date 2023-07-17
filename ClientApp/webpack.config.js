@@ -1,5 +1,3 @@
-module.exports = {
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
-  }
+export default {
+  extensions: ['.js', '.jsx', '.ts', '.tsx']
 }
