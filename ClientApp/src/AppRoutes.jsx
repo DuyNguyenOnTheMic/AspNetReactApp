@@ -2,7 +2,7 @@ import { Counter } from './components/Counter'
 import { Home } from './components/Home'
 import StudentManagement from './components/StudentManagement'
 import { WeatherForecast } from './components/WeatherForecast'
-import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
+import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
 
 const AppRoutes = [
   {
@@ -23,7 +23,7 @@ const AppRoutes = [
     requireAuth: true,
     element: <StudentManagement />
   },
-  ...ApiAuthorzationRoutes
+  ...ApiAuthorizationRoutes
 ]
 
 export default AppRoutes
