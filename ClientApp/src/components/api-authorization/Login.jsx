@@ -112,6 +112,7 @@ export class Login extends Component {
       // This is an extra check to prevent open redirects.
       throw new Error('Invalid return url. The return url needs to have the same origin as the current page.')
     }
+
     return (state && state.returnUrl) || fromQuery || `${window.location.origin}/`
   }
 
@@ -127,6 +128,7 @@ export class Login extends Component {
 
   redirectToApiAuthorizationPath(apiAuthorizationPath) {
     const redirectUrl = `${window.location.origin}/${apiAuthorizationPath}`
+
     // It's important that we do a replace here so that when the user hits the back arrow on the
     // browser they get sent back to where it was on the app instead of to an endpoint on this
     // component.

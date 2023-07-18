@@ -40,6 +40,7 @@ export default class AuthorizeRoute extends Component {
       return <div></div>
     } else {
       const { element } = this.props
+
       return authenticated ? element : <Navigate replace to={redirectUrl} />
     }
   }

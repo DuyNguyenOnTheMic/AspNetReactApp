@@ -13,6 +13,7 @@ export class AuthorizeService {
 
   async isAuthenticated() {
     const user = await this.getUser()
+
     return !!user
   }
 
@@ -23,12 +24,14 @@ export class AuthorizeService {
 
     await this.ensureUserManagerInitialized()
     const user = await this.userManager.getUser()
+
     return user && user.profile
   }
 
   async getAccessToken() {
     await this.ensureUserManagerInitialized()
     const user = await this.userManager.getUser()
+
     return user && user.access_token
   }
 
@@ -45,6 +48,7 @@ export class AuthorizeService {
     try {
       const silentUser = await this.userManager.signinSilent(this.createArguments())
       this.updateState(silentUser)
+
       return this.success(state)
     } catch (silentError) {
       // User might not be authenticated, fallback to popup authentication
@@ -59,6 +63,7 @@ export class AuthorizeService {
 
         const popUpUser = await this.userManager.signinPopup(this.createArguments())
         this.updateState(popUpUser)
+
         return this.success(state)
       } catch (popUpError) {
         if (popUpError.message === 'Popup window closed') {
@@ -71,9 +76,11 @@ export class AuthorizeService {
         // PopUps might be blocked by the user, fallback to redirect
         try {
           await this.userManager.signinRedirect(this.createArguments(state))
+
           return this.redirect()
         } catch (redirectError) {
           console.log('Redirect authentication error: ', redirectError)
+
           return this.error(redirectError)
         }
       }
@@ -85,9 +92,11 @@ export class AuthorizeService {
       await this.ensureUserManagerInitialized()
       const user = await this.userManager.signinCallback(url)
       this.updateState(user)
+
       return this.success(user && user.state)
     } catch (error) {
       console.log('There was an error signing in: ', error)
+
       return this.error('There was an error signing in.')
     }
   }
@@ -108,14 +117,17 @@ export class AuthorizeService {
 
       await this.userManager.signoutPopup(this.createArguments())
       this.updateState(undefined)
+
       return this.success(state)
     } catch (popupSignOutError) {
       console.log('Popup signout error: ', popupSignOutError)
       try {
         await this.userManager.signoutRedirect(this.createArguments(state))
+
         return this.redirect()
       } catch (redirectSignOutError) {
         console.log('Redirect signout error: ', redirectSignOutError)
+
         return this.error(redirectSignOutError)
       }
     }
@@ -126,9 +138,11 @@ export class AuthorizeService {
     try {
       const response = await this.userManager.signoutCallback(url)
       this.updateState(null)
+
       return this.success(response && response.data)
     } catch (error) {
       console.log(`There was an error trying to log out '${error}'.`)
+
       return this.error(error)
     }
   }
@@ -144,6 +158,7 @@ export class AuthorizeService {
       callback,
       subscription: this._nextSubscriptionId++
     })
+
     return this._nextSubscriptionId - 1
   }
 

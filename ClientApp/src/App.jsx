@@ -14,6 +14,7 @@ export default class App extends Component {
         <Routes>
           {AppRoutes.map((route, index) => {
             const { element, requireAuth, ...rest } = route
+
             return (
               <Route
                 key={index}
