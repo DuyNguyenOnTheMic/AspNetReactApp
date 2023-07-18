@@ -9,8 +9,7 @@ const StudentManagement = () => {
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [course, setCourse] = useState('')
-  const [students, setStudents] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [state, setState] = useState({ students: [], loading: true })
 
   useEffect(() => {
     populateStudentData()
@@ -23,18 +22,8 @@ const StudentManagement = () => {
       headers: !token ? {} : { Authorization: `Bearer ${token}` }
     })
     const data = await response.data
-    setStudents(data)
-    setLoading(false)
-    console.log(data)
+    setState({ students: data, loading: false })
   }
-
-  const contents = loading ? (
-    <p>
-      <em>Loading...</em>
-    </p>
-  ) : (
-    renderStudentsTable(students)
-  )
 
   function renderStudentsTable(students: StudentsType[]) {
     return (
@@ -45,6 +34,7 @@ const StudentManagement = () => {
             <th>Student Name</th>
             <th>Age</th>
             <th>Course</th>
+            <th>Note</th>
             <th>Option</th>
           </tr>
         </thead>
@@ -55,8 +45,9 @@ const StudentManagement = () => {
               <td>{student.name}</td>
               <td>{student.age}</td>
               <td>{student.course}</td>
+              <td>{student.note}</td>
               <td>
-                <button type='button' className='btn btn-warning' /* onClick={() => editStudent(student)} */>
+                <button type='button' className='btn btn-warning me-1' /* onClick={() => editStudent(student)} */>
                   Edit
                 </button>
                 <button type='button' className='btn btn-danger' /* onClick={() => DeleteStudent(student.id)} */>
@@ -69,6 +60,15 @@ const StudentManagement = () => {
       </table>
     )
   }
+
+  const contents = state.loading ? (
+    <div className='d-flex text-primary justify-content-center align-items-center'>
+      <div className='spinner-border me-2' role='status' aria-hidden='true'></div>
+      <strong>Loading...</strong>
+    </div>
+  ) : (
+    renderStudentsTable(state.students)
+  )
 
   return (
     <div>
@@ -108,9 +108,9 @@ const StudentManagement = () => {
             }}
           />
         </div>
-        <div>
-          <button className='btn btn-primary mt-4' /* onClick={save} */>Register</button>
-          <button className='btn btn-warning mt-4' /* onClick={update} */>Update</button>
+        <div className='mt-3'>
+          <button className='btn btn-primary me-1' /* onClick={save} */>Register</button>
+          <button className='btn btn-warning' /* onClick={update} */>Update</button>
         </div>
       </form>
       {contents}

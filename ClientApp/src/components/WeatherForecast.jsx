@@ -41,9 +41,10 @@ export class WeatherForecast extends Component {
 
   render() {
     const contents = this.state.loading ? (
-      <p>
-        <em>Loading...</em>
-      </p>
+      <div className='d-flex text-primary justify-content-center align-items-center'>
+        <div className='spinner-border me-2' role='status' aria-hidden='true'></div>
+        <strong>Loading...</strong>
+      </div>
     ) : (
       WeatherForecast.renderForecastsTable(this.state.forecasts)
     )

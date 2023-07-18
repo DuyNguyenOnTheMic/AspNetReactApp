@@ -3,20 +3,30 @@ a {
   color: #0366d6;
 }
 
-.btn:focus,
-.btn:active:focus,
-.btn-link.nav-link:focus,
-.form-control:focus,
-.form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.form-control:focus {
+  border-color: #0077cc;
+  outline: black auto 1px;
+  box-shadow: none;
 }
 
-code {
-  color: #e01a76;
+.form-check-input:focus {
+  border-color: #0077cc;
+  box-shadow: none;
+  outline: black auto 1px;
 }
 
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.btn-primary:focus {
+  box-shadow: none;
+  outline: black auto 1px;
+  box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+code {
+  color: #e01a76;
 }
