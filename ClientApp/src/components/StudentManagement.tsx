@@ -14,7 +14,7 @@ const StudentManagement = () => {
     ;(async () => await Load())()
   }, [])
 
-  // Load student data
+  // Fetch students data
   async function Load() {
     const token = await authService.getAccessToken()
     const response = await fetch(uri, {
