@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { Component } from 'react'
 import authService from './api-authorization/AuthorizeService'
 
@@ -39,7 +40,7 @@ export class WeatherForecast extends Component {
   }
 
   render() {
-    let contents = this.state.loading ? (
+    const contents = this.state.loading ? (
       <p>
         <em>Loading...</em>
       </p>
@@ -58,10 +59,10 @@ export class WeatherForecast extends Component {
 
   async populateWeatherData() {
     const token = await authService.getAccessToken()
-    const response = await fetch('weatherforecast', {
+    const response = await axios.get('weatherforecast', {
       headers: !token ? {} : { Authorization: `Bearer ${token}` }
     })
-    const data = await response.json()
+    const data = await response.data
     this.setState({ forecasts: data, loading: false })
   }
 }
