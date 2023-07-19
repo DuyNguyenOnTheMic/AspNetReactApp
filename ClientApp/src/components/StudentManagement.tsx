@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import Button from 'react-bootstrap/Button'
 import { StudentsType } from 'src/types/studentTypes'
 import authService from './api-authorization/AuthorizeService'
 
@@ -47,12 +48,12 @@ const StudentManagement = () => {
               <td>{student.course}</td>
               <td>{student.note}</td>
               <td>
-                <button type='button' className='btn btn-warning me-1' /* onClick={() => editStudent(student)} */>
+                <Button type='button' variant='warning' className='me-1' /* onClick={() => editStudent(student)} */>
                   Edit
-                </button>
-                <button type='button' className='btn btn-danger' /* onClick={() => DeleteStudent(student.id)} */>
+                </Button>
+                <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
                   Delete
-                </button>
+                </Button>
               </td>
             </tr>
           ))}
@@ -109,8 +110,12 @@ const StudentManagement = () => {
           />
         </div>
         <div className='mt-3'>
-          <button className='btn btn-primary me-1' /* onClick={save} */>Register</button>
-          <button className='btn btn-warning' /* onClick={update} */>Update</button>
+          <Button type='button' variant='primary' className='me-1' /* onClick={save} */>
+            Register
+          </Button>
+          <Button type='button' variant='warning' /* onClick={update} */>
+            Update
+          </Button>
         </div>
       </form>
       {contents}

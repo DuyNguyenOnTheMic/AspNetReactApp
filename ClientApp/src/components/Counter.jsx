@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Button from 'react-bootstrap/Button'
 
 export class Counter extends Component {
   static displayName = Counter.name
@@ -26,9 +27,9 @@ export class Counter extends Component {
           Current count: <strong>{this.state.currentCount}</strong>
         </p>
 
-        <button className='btn btn-primary' onClick={this.incrementCounter}>
+        <Button variant='primary' onClick={this.incrementCounter}>
           Increment
-        </button>
+        </Button>
       </div>
     )
   }
