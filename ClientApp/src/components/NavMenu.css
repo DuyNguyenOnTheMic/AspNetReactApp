@@ -4,6 +4,10 @@
   word-break: break-all;
 }
 
+[data-bs-theme='light'] .nav-link {
+  color: #212529 !important;
+}
+
 .nav-link.active {
   color: #fff !important;
   background-color: #1b6ec2;

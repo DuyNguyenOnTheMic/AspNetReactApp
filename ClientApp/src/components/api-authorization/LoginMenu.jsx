@@ -51,12 +51,12 @@ export class LoginMenu extends Component {
     return (
       <Fragment>
         <NavItem>
-          <NavLink tag={Link} className='text-dark' to={profilePath}>
+          <NavLink tag={Link} to={profilePath}>
             Hello {userName}
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink replace tag={Link} className='text-dark' to={logoutPath} state={logoutState}>
+          <NavLink replace tag={Link} to={logoutPath} state={logoutState}>
             Logout
           </NavLink>
         </NavItem>
@@ -68,12 +68,12 @@ export class LoginMenu extends Component {
     return (
       <Fragment>
         <NavItem>
-          <NavLink tag={Link} className='text-dark' to={registerPath}>
+          <NavLink tag={Link} to={registerPath}>
             Register
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className='text-dark' to={loginPath}>
+          <NavLink tag={Link} to={loginPath}>
             Login
           </NavLink>
         </NavItem>
