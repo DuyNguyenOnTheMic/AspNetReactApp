@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import Table from 'react-bootstrap/Table'
 import { StudentsType } from 'src/types/studentTypes'
 import authService from './api-authorization/AuthorizeService'
 
@@ -28,7 +29,7 @@ const StudentManagement = () => {
 
   function renderStudentsTable(students: StudentsType[]) {
     return (
-      <table className='table table-striped table-hover' aria-labelledby='tableLabel'>
+      <Table striped hover aria-labelledby='tableLabel'>
         <thead>
           <tr>
             <th>Student ID</th>
@@ -58,7 +59,7 @@ const StudentManagement = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     )
   }
 

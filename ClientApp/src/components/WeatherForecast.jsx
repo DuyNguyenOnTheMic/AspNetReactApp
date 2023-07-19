@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Component } from 'react'
+import Table from 'react-bootstrap/Table'
 import authService from './api-authorization/AuthorizeService'
 
 export class WeatherForecast extends Component {
@@ -16,7 +17,7 @@ export class WeatherForecast extends Component {
 
   static renderForecastsTable(forecasts) {
     return (
-      <table className='table table-striped table-hover' aria-labelledby='tableLabel'>
+      <Table striped hover aria-labelledby='tableLabel'>
         <thead>
           <tr>
             <th>Date</th>
@@ -35,7 +36,7 @@ export class WeatherForecast extends Component {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     )
   }
 
