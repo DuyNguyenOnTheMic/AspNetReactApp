@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table'
 import { StudentsType } from 'src/types/studentTypes'
 import authService from './api-authorization/AuthorizeService'
@@ -8,10 +11,16 @@ import authService from './api-authorization/AuthorizeService'
 const uri = 'api/students'
 
 const StudentManagement = () => {
+  // Form useStates
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [course, setCourse] = useState('')
   const [state, setState] = useState({ students: [], loading: true })
+
+  // Bootstrap modal useStates
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   useEffect(() => {
     populateStudentData()
@@ -75,50 +84,65 @@ const StudentManagement = () => {
   return (
     <div>
       <h1 id='tableLabel'>Student management</h1>
-      <form className='mb-3'>
-        <div className='form-group'>
-          <input
-            type='text'
-            className='form-control'
-            id='id'
-            hidden
-            value={id}
-            onChange={event => {
-              setId(event.target.value)
-            }}
-          />
-          <label>Student Name</label>
-          <input
-            type='text'
-            className='form-control'
-            id='name'
-            value={name}
-            onChange={event => {
-              setName(event.target.value)
-            }}
-          />
-        </div>
-        <div className='form-group'>
-          <label>Course</label>
-          <input
-            type='text'
-            className='form-control'
-            id='course'
-            value={course}
-            onChange={event => {
-              setCourse(event.target.value)
-            }}
-          />
-        </div>
-        <div className='mt-3'>
-          <Button type='button' variant='primary' className='me-1' /* onClick={save} */>
-            Register
+      <div className='float-end mt-3'>
+        <Button type='button' variant='primary' className='me-1' onClick={handleShow} /* onClick={save} */>
+          Register
+        </Button>
+      </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
+              <Form.Control
+                type='text'
+                placeholder='Student ID'
+                value={id}
+                onChange={event => {
+                  setId(event.target.value)
+                }}
+                autoFocus
+              />
+            </FloatingLabel>
+            <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
+              <Form.Control
+                type='text'
+                placeholder='Student Name'
+                value={name}
+                onChange={event => {
+                  setName(event.target.value)
+                }}
+              />
+            </FloatingLabel>
+            <FloatingLabel className='mb-3' controlId='Age' label='Age'>
+              <Form.Control type='number' placeholder='Age' />
+            </FloatingLabel>
+            <FloatingLabel className='mb-3' controlId='Course' label='Course'>
+              <Form.Control
+                type='text'
+                placeholder='Course'
+                value={course}
+                onChange={event => {
+                  setCourse(event.target.value)
+                }}
+              />
+            </FloatingLabel>
+            <FloatingLabel controlId='Note' label='Note'>
+              <Form.Control as='textarea' placeholder='Note' style={{ height: '100px' }} />
+            </FloatingLabel>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleClose}>
+            Close
           </Button>
-          <Button type='button' variant='warning' /* onClick={update} */>
-            Update
+          <Button variant='primary' onClick={handleClose}>
+            Save Changes
           </Button>
-        </div>
-      </form>
+        </Modal.Footer>
+      </Modal>
       {contents}
     </div>
   )
