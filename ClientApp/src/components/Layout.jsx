@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { Component } from 'react'
-import { Container } from 'reactstrap'
+import Container from 'react-bootstrap/Container'
 import { NavMenu } from './NavMenu'
 
 export class Layout extends Component {
