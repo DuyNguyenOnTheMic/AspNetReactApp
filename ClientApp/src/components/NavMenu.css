@@ -4,8 +4,9 @@
   word-break: break-all;
 }
 
-[data-bs-theme='light'] .nav-link {
-  color: #212529 !important;
+html[data-bs-theme='light'] .nav-link {
+  color: #212529;
+  padding-left: 10px;
 }
 
 .nav-link.active {

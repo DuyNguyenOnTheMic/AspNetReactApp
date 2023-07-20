@@ -28,15 +28,11 @@ export class NavMenu extends Component {
   render() {
     return (
       <header>
-        <Navbar
-          collapseOnSelect
-          expand='lg'
-          className='navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3'
-        >
+        <Navbar collapseOnSelect expand='lg' className='navbar-toggleable-sm ng-white border-bottom box-shadow mb-3'>
           <Container>
             <Navbar.Brand href='/'>AspNetReactApp</Navbar.Brand>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-            <Navbar.Collapse id='responsive-navbar-nav'>
+            <Navbar.Collapse className='mt-2' id='responsive-navbar-nav'>
               <Nav defaultActiveKey='/' className='me-auto'>
                 <Nav.Link as={NavLink} to='/'>
                   Home
