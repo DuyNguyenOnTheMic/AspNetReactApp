@@ -1,13 +1,12 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table'
 import { StudentsType } from 'src/types/studentTypes'
 import authService from './api-authorization/AuthorizeService'
+import ModalStudentForm from './modals/ModalStudentForm'
 
+// API uri
 const uri = 'api/students'
 
 const StudentManagement = () => {
@@ -89,60 +88,16 @@ const StudentManagement = () => {
           Register
         </Button>
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
-              <Form.Control
-                type='text'
-                placeholder='Student ID'
-                value={id}
-                onChange={event => {
-                  setId(event.target.value)
-                }}
-                autoFocus
-              />
-            </FloatingLabel>
-            <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
-              <Form.Control
-                type='text'
-                placeholder='Student Name'
-                value={name}
-                onChange={event => {
-                  setName(event.target.value)
-                }}
-              />
-            </FloatingLabel>
-            <FloatingLabel className='mb-3' controlId='Age' label='Age'>
-              <Form.Control type='number' placeholder='Age' />
-            </FloatingLabel>
-            <FloatingLabel className='mb-3' controlId='Course' label='Course'>
-              <Form.Control
-                type='text'
-                placeholder='Course'
-                value={course}
-                onChange={event => {
-                  setCourse(event.target.value)
-                }}
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId='Note' label='Note'>
-              <Form.Control as='textarea' placeholder='Note' style={{ height: '100px' }} />
-            </FloatingLabel>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ModalStudentForm
+        id={id}
+        setId={setId}
+        name={name}
+        setName={setName}
+        course={course}
+        setCourse={setCourse}
+        show={show}
+        handleClose={handleClose}
+      />
       {contents}
     </div>
   )

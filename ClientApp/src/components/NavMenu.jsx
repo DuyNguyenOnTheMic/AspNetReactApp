@@ -66,7 +66,7 @@ export class NavMenu extends Component {
               </Nav>
             </Navbar.Collapse>
           </Container>
-        </Navbar>{' '}
+        </Navbar>
       </header>
     )
   }
