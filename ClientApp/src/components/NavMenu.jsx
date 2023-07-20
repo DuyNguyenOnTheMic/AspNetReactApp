@@ -49,9 +49,9 @@ export class NavMenu extends Component {
                 <Nav.Link as={NavLink} to='/swagger' target='_blank' rel='noreferrer'>
                   Swagger
                 </Nav.Link>
-                <DarkModeDropdown />
               </Nav>
               <Nav>
+                <DarkModeDropdown />
                 <LoginMenu />
               </Nav>
             </Navbar.Collapse>
