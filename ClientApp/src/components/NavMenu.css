@@ -4,8 +4,13 @@
   word-break: break-all;
 }
 
-html[data-bs-theme='light'] .nav-link {
+.nav-link {
   color: #212529;
+  padding-left: 10px;
+}
+
+html[data-bs-theme='dark'] .nav-link {
+  color: rgba(255, 255, 255, 0.65);
   padding-left: 10px;
 }
 
