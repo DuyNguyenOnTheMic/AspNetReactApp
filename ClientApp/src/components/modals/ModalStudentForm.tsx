@@ -17,12 +17,12 @@ const ModalStudentForm = () => {
 
   return (
     <Fragment>
-      <div className='float-end mt-3'>
+      <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
         <Button type='button' variant='primary' className='me-1' onClick={handleShow} /* onClick={save} */>
           Register
         </Button>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Student Management</Modal.Title>
         </Modal.Header>
