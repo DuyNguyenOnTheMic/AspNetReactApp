@@ -52,12 +52,14 @@ export default function DarkModeDropdown() {
         return (
           <NavDropdown.Item
             key={theme.name}
-            className={active ? 'active' : ''}
+            className={'d-flex align-items-center ' + (active && 'active')}
             onClick={() => {
               setPreferredTheme(theme.name.toLocaleLowerCase())
             }}
           >
-            {theme.icon} {theme.name} {active ? '✔️' : ''}
+            <span className='me-2'>{theme.icon}</span>
+            {theme.name}
+            <span className='ms-auto'>{active && '✔️'}</span>
           </NavDropdown.Item>
         )
       })}
