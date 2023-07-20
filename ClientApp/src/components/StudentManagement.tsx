@@ -10,16 +10,8 @@ import ModalStudentForm from './modals/ModalStudentForm'
 const uri = 'api/students'
 
 const StudentManagement = () => {
-  // Form useStates
-  const [id, setId] = useState('')
-  const [name, setName] = useState('')
-  const [course, setCourse] = useState('')
+  // Loading useStates
   const [state, setState] = useState({ students: [], loading: true })
-
-  // Bootstrap modal useStates
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
 
   useEffect(() => {
     populateStudentData()
@@ -83,21 +75,7 @@ const StudentManagement = () => {
   return (
     <div>
       <h1 id='tableLabel'>Student management</h1>
-      <div className='float-end mt-3'>
-        <Button type='button' variant='primary' className='me-1' onClick={handleShow} /* onClick={save} */>
-          Register
-        </Button>
-      </div>
-      <ModalStudentForm
-        id={id}
-        setId={setId}
-        name={name}
-        setName={setName}
-        course={course}
-        setCourse={setCourse}
-        show={show}
-        handleClose={handleClose}
-      />
+      <ModalStudentForm />
       {contents}
     </div>
   )
