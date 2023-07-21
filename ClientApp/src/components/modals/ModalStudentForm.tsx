@@ -6,7 +6,11 @@ import Modal from 'react-bootstrap/Modal'
 import { addStudent } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 
-const ModalStudentForm = () => {
+interface FormProps {
+  refresh(): Promise<void>
+}
+
+const ModalStudentForm = (props: FormProps) => {
   // Form useStates
   const [id, setId] = useState<string>('')
   const [name, setName] = useState<string>('')
@@ -18,7 +22,6 @@ const ModalStudentForm = () => {
   const [show, setShow] = useState<boolean>(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const student: StudentsType = {
@@ -29,6 +32,7 @@ const ModalStudentForm = () => {
       note: note
     }
     await addStudent(student)
+    props.refresh()
     handleClose()
   }
 
