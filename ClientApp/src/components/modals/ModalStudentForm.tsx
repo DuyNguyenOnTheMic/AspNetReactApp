@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useState } from 'react'
+import { FormEvent, Fragment, Reducer, useReducer, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
@@ -10,13 +10,37 @@ interface FormProps {
   refresh(): Promise<void>
 }
 
+interface IAction {
+  type: string
+  value?: string
+}
+
+const initialState: StudentsType = {
+  id: '',
+  name: '',
+  age: Number(''),
+  course: '',
+  note: ''
+}
+
+function reducer(state: StudentsType, action: IAction) {
+  if (action.type === 'reset') {
+    return initialState
+  }
+  const result: any = { ...state }
+  result[action.type.toLocaleLowerCase()] = action.value!
+
+  return result
+}
+
 const ModalStudentForm = (props: FormProps) => {
   // Form useStates
-  const [id, setId] = useState<string>('')
-  const [name, setName] = useState<string>('')
-  const [course, setCourse] = useState<string>('')
-  const [age, setAge] = useState(0)
-  const [note, setNote] = useState<string>('')
+  const [state, dispatch] = useReducer<Reducer<StudentsType, IAction>, StudentsType>(
+    reducer,
+    initialState,
+    () => initialState
+  )
+  const { id, name, age, course, note } = state
 
   // Bootstrap modal useStates
   const [show, setShow] = useState<boolean>(false)
@@ -32,8 +56,13 @@ const ModalStudentForm = (props: FormProps) => {
       note: note
     }
     await addStudent(student)
+    dispatch({ type: 'reset' })
     props.refresh()
     handleClose()
+  }
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target
+    dispatch({ type: id, value })
   }
 
   return (
@@ -50,45 +79,16 @@ const ModalStudentForm = (props: FormProps) => {
           </Modal.Header>
           <Modal.Body>
             <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
-              <Form.Control
-                type='text'
-                placeholder='Student ID'
-                value={id}
-                onChange={event => {
-                  setId(event.target.value)
-                }}
-                autoFocus
-              />
+              <Form.Control type='text' placeholder='Student ID' value={id} onChange={onChange} autoFocus />
             </FloatingLabel>
             <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
-              <Form.Control
-                type='text'
-                placeholder='Student Name'
-                value={name}
-                onChange={event => {
-                  setName(event.target.value)
-                }}
-              />
+              <Form.Control type='text' placeholder='Student Name' value={name} onChange={onChange} />
             </FloatingLabel>
             <FloatingLabel className='mb-3' controlId='Age' label='Age'>
-              <Form.Control
-                type='number'
-                placeholder='Age'
-                value={age > 0 ? age : ''}
-                onChange={event => {
-                  setAge(+event.target.value)
-                }}
-              />
+              <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={onChange} />
             </FloatingLabel>
             <FloatingLabel className='mb-3' controlId='Course' label='Course'>
-              <Form.Control
-                type='text'
-                placeholder='Course'
-                value={course}
-                onChange={event => {
-                  setCourse(event.target.value)
-                }}
-              />
+              <Form.Control type='text' placeholder='Course' value={course} onChange={onChange} />
             </FloatingLabel>
             <FloatingLabel controlId='Note' label='Note'>
               <Form.Control
@@ -98,9 +98,7 @@ const ModalStudentForm = (props: FormProps) => {
                   height: '100px'
                 }}
                 value={note}
-                onChange={event => {
-                  setNote(event.target.value)
-                }}
+                onChange={onChange}
               />
             </FloatingLabel>
           </Modal.Body>
