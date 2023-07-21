@@ -1,13 +1,9 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
+import { fetchData } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
-import authService from './api-authorization/AuthorizeService'
 import ModalStudentForm from './modals/ModalStudentForm'
-
-// API uri
-const uri = 'api/students'
 
 const StudentManagement = () => {
   // Loading useStates
@@ -19,11 +15,7 @@ const StudentManagement = () => {
 
   // Populate student data
   async function populateStudentData() {
-    const token = await authService.getAccessToken()
-    const response = await axios.get(uri, {
-      headers: !token ? {} : { Authorization: `Bearer ${token}` }
-    })
-    const data = await response.data
+    const data = await fetchData()
     setState({ students: data, loading: false })
   }
 
