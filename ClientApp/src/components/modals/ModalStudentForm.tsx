@@ -74,7 +74,7 @@ const ModalStudentForm = (props: FormProps) => {
               <Form.Control
                 type='number'
                 placeholder='Age'
-                value={age}
+                value={age > 0 ? age : ''}
                 onChange={event => {
                   setAge(+event.target.value)
                 }}
