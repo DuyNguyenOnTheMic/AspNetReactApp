@@ -55,11 +55,10 @@ const ModalStudentForm = (props: FormProps) => {
       course: course,
       note: note
     }
-    await addStudent(student).then(() => {
-      dispatch({ type: 'reset' })
-      props.populateStudentData()
-      handleClose()
-    })
+    await addStudent(student)
+    dispatch({ type: 'reset' })
+    props.populateStudentData()
+    handleClose()
   }
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
