@@ -28,7 +28,7 @@ function reducer(state: StudentsType, action: IAction) {
     return initialState
   }
   const result: any = { ...state }
-  result[action.type.toLocaleLowerCase()] = action.value!
+  result[action.type.toLocaleLowerCase()] = action.value
 
   return result
 }
