@@ -7,7 +7,7 @@ import { addStudent } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 
 interface FormProps {
-  refresh(): Promise<void>
+  populateStudentData(): Promise<void>
 }
 
 interface IAction {
@@ -57,7 +57,7 @@ const ModalStudentForm = (props: FormProps) => {
     }
     await addStudent(student).then(() => {
       dispatch({ type: 'reset' })
-      props.refresh()
+      props.populateStudentData()
       handleClose()
     })
   }

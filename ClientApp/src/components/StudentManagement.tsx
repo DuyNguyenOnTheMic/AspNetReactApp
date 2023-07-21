@@ -67,7 +67,7 @@ const StudentManagement = () => {
   return (
     <div>
       <h1 id='tableLabel'>Student management</h1>
-      <ModalStudentForm refresh={populateStudentData} />
+      <ModalStudentForm populateStudentData={populateStudentData} />
       {contents}
     </div>
   )
