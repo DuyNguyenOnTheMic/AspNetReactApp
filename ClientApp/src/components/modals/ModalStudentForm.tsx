@@ -1,33 +1,50 @@
-import { Fragment, useState } from 'react'
+import { FormEvent, Fragment, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
+import { addStudent } from 'src/api/students'
+import { StudentsType } from 'src/types/studentTypes'
 
 const ModalStudentForm = () => {
   // Form useStates
   const [id, setId] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [course, setCourse] = useState<string>('')
+  const [age, setAge] = useState(0)
+  const [note, setNote] = useState<string>('')
 
   // Bootstrap modal useStates
   const [show, setShow] = useState<boolean>(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    const student: StudentsType = {
+      id: id,
+      name: name,
+      age: age,
+      course: course,
+      note: note
+    }
+    await addStudent(student)
+    handleClose()
+  }
+
   return (
     <Fragment>
       <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-        <Button type='button' variant='primary' className='me-1' onClick={handleShow} /* onClick={save} */>
+        <Button type='button' variant='primary' className='me-1' onClick={handleShow}>
           Register
         </Button>
       </div>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Student Management</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title>Student Management</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
               <Form.Control
                 type='text'
@@ -50,7 +67,14 @@ const ModalStudentForm = () => {
               />
             </FloatingLabel>
             <FloatingLabel className='mb-3' controlId='Age' label='Age'>
-              <Form.Control type='number' placeholder='Age' />
+              <Form.Control
+                type='number'
+                placeholder='Age'
+                value={age}
+                onChange={event => {
+                  setAge(+event.target.value)
+                }}
+              />
             </FloatingLabel>
             <FloatingLabel className='mb-3' controlId='Course' label='Course'>
               <Form.Control
@@ -69,18 +93,22 @@ const ModalStudentForm = () => {
                 style={{
                   height: '100px'
                 }}
+                value={note}
+                onChange={event => {
+                  setNote(event.target.value)
+                }}
               />
             </FloatingLabel>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' type='button' onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant='primary' type='submit'>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </Fragment>
   )
