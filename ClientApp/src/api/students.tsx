@@ -1,18 +1,12 @@
 import axios from 'axios'
-import authService from 'src/components/api-authorization/AuthorizeService'
+import RequestHeader from 'src/components/api-authorization/RequestHeader'
 
 // ** API uri
 const uri = 'api/students'
 
-const getAccessToken = async () => await authService.getAccessToken()
-
 // ** Fetch Students
 export const fetchData = async () => {
-  const token = await getAccessToken()
-  console.log(token)
-  const response = await axios.get(uri, {
-    headers: !token ? {} : { Authorization: `Bearer ${token}` }
-  })
+  const response = await axios.get(uri, await RequestHeader())
 
   return response.data
 }
