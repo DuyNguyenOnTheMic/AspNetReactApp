@@ -1,6 +1,6 @@
 import authService from './AuthorizeService'
 
-export default async () => {
+export default async function () {
   const token = await authService.getAccessToken()
 
   return {
