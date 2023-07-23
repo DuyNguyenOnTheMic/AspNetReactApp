@@ -6,8 +6,8 @@ import { StudentsType } from 'src/types/studentTypes'
 const uri = 'api/students'
 
 // ** Fetch Students
-export const fetchData = async () => {
-  const response = await axios.get(uri, await RequestHeader())
+export const fetchData = async (currentPage: number, dataPerPage: number) => {
+  const response = await axios.get(`${uri}?page=${currentPage}&per_page=${dataPerPage}`, await RequestHeader())
 
   return response.data
 }

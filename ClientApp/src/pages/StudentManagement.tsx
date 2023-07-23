@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { fetchData } from 'src/api/students'
@@ -13,16 +13,16 @@ const StudentManagement = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPerPage] = useState(10)
 
-  useEffect(() => {
-    populateStudentData()
-  }, [])
-
   // Populate student data
-  async function populateStudentData() {
-    const data = await fetchData()
+  const populateStudentData = useCallback(async () => {
+    const data = await fetchData(currentPage, dataPerPage)
     setData(data)
     setLoading(false)
-  }
+  }, [currentPage, dataPerPage])
+
+  useEffect(() => {
+    populateStudentData()
+  }, [populateStudentData])
 
   // Get current data
   const indexOfLastData = currentPage * dataPerPage
