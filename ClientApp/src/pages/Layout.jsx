@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Component } from 'react'
 import Container from 'react-bootstrap/Container'
-import { NavMenu } from './NavMenu'
+import { NavMenu } from './components/NavMenu'
 
 export class Layout extends Component {
   static displayName = Layout.name

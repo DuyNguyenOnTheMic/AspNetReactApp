@@ -1,8 +1,8 @@
-import { Counter } from './components/Counter'
-import { Home } from './components/Home'
-import StudentManagement from './components/StudentManagement'
-import { WeatherForecast } from './components/WeatherForecast'
-import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes'
+import { Counter } from './pages/Counter'
+import { Home } from './pages/Home'
+import StudentManagement from './pages/StudentManagement'
+import { WeatherForecast } from './pages/WeatherForecast'
+import ApiAuthorizationRoutes from './pages/api-authorization/ApiAuthorizationRoutes'
 
 const AppRoutes = [
   {

@@ -1,9 +1,9 @@
 import { Component } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
-import { Layout } from './components/Layout'
-import AuthorizeRoute from './components/api-authorization/AuthorizeRoute'
 import './custom.css'
+import { Layout } from './pages/Layout'
+import AuthorizeRoute from './pages/api-authorization/AuthorizeRoute'
 
 export default class App extends Component {
   static displayName = App.name

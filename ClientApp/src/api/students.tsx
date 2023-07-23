@@ -1,5 +1,5 @@
 import axios from 'axios'
-import RequestHeader from 'src/components/api-authorization/RequestHeader'
+import RequestHeader from 'src/pages/api-authorization/RequestHeader'
 import { StudentsType } from 'src/types/studentTypes'
 
 // ** API uri

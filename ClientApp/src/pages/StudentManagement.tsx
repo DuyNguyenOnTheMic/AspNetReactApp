@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { fetchData } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
-import ModalStudentForm from './modals/ModalStudentForm'
+import ModalStudentForm from './components/ModalStudentForm'
 
 const StudentManagement = () => {
   // Loading useStates
