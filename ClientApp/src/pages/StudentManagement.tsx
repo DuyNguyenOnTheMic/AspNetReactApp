@@ -8,7 +8,8 @@ import ModalStudentForm from './components/ModalStudentForm'
 
 const StudentManagement = () => {
   // Loading useStates
-  const [state, setState] = useState({ students: [], loading: true })
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPerPage] = useState(10)
 
@@ -19,13 +20,14 @@ const StudentManagement = () => {
   // Populate student data
   async function populateStudentData() {
     const data = await fetchData()
-    setState({ students: data, loading: false })
+    setData(data)
+    setLoading(false)
   }
 
   // Get current data
-  //const indexOfLastData = currentPage * dataPerPage
-  //const indexOfFirstData = indexOfLastData - dataPerPage
-  //const currentData = state.students.slice(indexOfFirstData, indexOfLastData)
+  const indexOfLastData = currentPage * dataPerPage
+  const indexOfFirstData = indexOfLastData - dataPerPage
+  const currentData = data.slice(indexOfFirstData, indexOfLastData)
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
@@ -66,7 +68,7 @@ const StudentManagement = () => {
         </Table>
         <CustomPagination
           dataPerPage={dataPerPage}
-          totalData={state.students.length}
+          totalData={data.length}
           paginate={paginate}
           currentPage={currentPage}
         />
@@ -74,13 +76,13 @@ const StudentManagement = () => {
     )
   }
 
-  const contents = state.loading ? (
+  const contents = loading ? (
     <div className='d-flex text-primary justify-content-center align-items-center'>
       <div className='spinner-border me-2' role='status' aria-hidden='true'></div>
       <strong>Loading...</strong>
     </div>
   ) : (
-    renderStudentsTable(state.students)
+    renderStudentsTable(currentData)
   )
 
   return (

@@ -18,7 +18,7 @@ const CustomPagination = ({ dataPerPage, totalData, paginate, currentPage }: Pag
   }
 
   return (
-    <Pagination>
+    <Pagination className='justify-content-center'>
       <Pagination.First onClick={() => paginate(1)} disabled={currentPage === 1} />
       <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
       {start !== 1 && <Pagination.Ellipsis />}
