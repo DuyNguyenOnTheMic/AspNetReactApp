@@ -77,7 +77,7 @@ const StudentManagement = () => {
   function renderStudentsTable(students: StudentsType[]) {
     return (
       <Fragment>
-        <Table striped hover aria-labelledby='tableLabel'>
+        <Table striped hover responsive aria-labelledby='tableLabel'>
           <thead>
             <tr>
               <th className={getClassNamesFor('id')} onClick={() => requestSort('id')}>
@@ -95,7 +95,7 @@ const StudentManagement = () => {
               <th className={getClassNamesFor('note')} onClick={() => requestSort('note')}>
                 Note
               </th>
-              <th>Option</th>
+              <th className='text-center'>Option</th>
             </tr>
           </thead>
           <tbody>
@@ -106,7 +106,7 @@ const StudentManagement = () => {
                 <td>{student.age}</td>
                 <td>{student.course}</td>
                 <td>{student.note}</td>
-                <td>
+                <td className='text-center'>
                   <Button type='button' variant='warning' className='me-1' /* onClick={() => editStudent(student)} */>
                     Edit
                   </Button>

@@ -12,3 +12,19 @@ a {
 code {
   color: #e01a76;
 }
+
+thead th {
+  cursor: pointer;
+}
+
+thead th.ascending::after {
+  content: '👇';
+  display: inline-block;
+  margin-left: 1em;
+}
+
+thead th.descending::after {
+  content: '☝️';
+  display: inline-block;
+  margin-left: 1em;
+}
