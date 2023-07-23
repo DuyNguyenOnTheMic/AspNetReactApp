@@ -1,10 +1,42 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { fetchData } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from './components/CustomPagination'
 import ModalStudentForm from './components/ModalStudentForm'
+
+const useSortableData = (items: any, config = null) => {
+  const [sortConfig, setSortConfig] = useState<any>(config)
+
+  const sortedItems = useMemo(() => {
+    const sortableItems = [...items]
+    if (sortConfig !== null) {
+      sortableItems.sort((a: any, b: any) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1
+        }
+
+        return 0
+      })
+    }
+
+    return sortableItems
+  }, [items, sortConfig])
+
+  const requestSort = (key: any) => {
+    let direction = 'ascending'
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending'
+    }
+    setSortConfig({ key, direction })
+  }
+
+  return { items: sortedItems, requestSort, sortConfig }
+}
 
 const StudentManagement = () => {
   // Loading useStates
@@ -28,6 +60,15 @@ const StudentManagement = () => {
   const indexOfLastData = currentPage * dataPerPage
   const indexOfFirstData = indexOfLastData - dataPerPage
   const currentData = data.slice(indexOfFirstData, indexOfLastData)
+  const { items, requestSort, sortConfig } = useSortableData(data)
+  console.log(items)
+  const getClassNamesFor = (name: string) => {
+    if (!sortConfig) {
+      return
+    }
+
+    return sortConfig.key === name ? sortConfig.direction : undefined
+  }
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
@@ -38,7 +79,9 @@ const StudentManagement = () => {
         <Table striped hover aria-labelledby='tableLabel'>
           <thead>
             <tr>
-              <th>Student ID</th>
+              <th onClick={() => requestSort('id')} className={getClassNamesFor('name')}>
+                Student ID
+              </th>
               <th>Student Name</th>
               <th>Age</th>
               <th>Course</th>
