@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { fetchData } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
+import CustomPagination from './components/CustomPagination'
 import ModalStudentForm from './components/ModalStudentForm'
 
 const StudentManagement = () => {
   // Loading useStates
   const [state, setState] = useState({ students: [], loading: true })
+  const [currentPage, setCurrentPage] = useState(1)
+  const [dataPerPage] = useState(10)
 
   useEffect(() => {
     populateStudentData()
@@ -19,39 +22,55 @@ const StudentManagement = () => {
     setState({ students: data, loading: false })
   }
 
+  // Get current data
+  //const indexOfLastData = currentPage * dataPerPage
+  //const indexOfFirstData = indexOfLastData - dataPerPage
+  //const currentData = state.students.slice(indexOfFirstData, indexOfLastData)
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
   function renderStudentsTable(students: StudentsType[]) {
     return (
-      <Table striped hover aria-labelledby='tableLabel'>
-        <thead>
-          <tr>
-            <th>Student ID</th>
-            <th>Student Name</th>
-            <th>Age</th>
-            <th>Course</th>
-            <th>Note</th>
-            <th>Option</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map(student => (
-            <tr key={student.id}>
-              <td>{student.id} </td>
-              <td>{student.name}</td>
-              <td>{student.age}</td>
-              <td>{student.course}</td>
-              <td>{student.note}</td>
-              <td>
-                <Button type='button' variant='warning' className='me-1' /* onClick={() => editStudent(student)} */>
-                  Edit
-                </Button>
-                <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
-                  Delete
-                </Button>
-              </td>
+      <Fragment>
+        <Table striped hover aria-labelledby='tableLabel'>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Student Name</th>
+              <th>Age</th>
+              <th>Course</th>
+              <th>Note</th>
+              <th>Option</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {students.map(student => (
+              <tr key={student.id}>
+                <td>{student.id} </td>
+                <td>{student.name}</td>
+                <td>{student.age}</td>
+                <td>{student.course}</td>
+                <td>{student.note}</td>
+                <td>
+                  <Button type='button' variant='warning' className='me-1' /* onClick={() => editStudent(student)} */>
+                    Edit
+                  </Button>
+                  <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <CustomPagination
+          dataPerPage={dataPerPage}
+          totalData={state.students.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </Fragment>
     )
   }
 
