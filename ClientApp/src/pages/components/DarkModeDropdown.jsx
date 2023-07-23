@@ -24,8 +24,7 @@ export default function DarkModeDropdown() {
   const [mode, setMode] = useState(getPreferredTheme())
 
   useEffect(() => {
-    if (IS_SERVER) return
-    modifyDOM(mode)
+    if (IS_SERVER) return modifyDOM(mode)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -39,7 +38,6 @@ export default function DarkModeDropdown() {
 
   function setPreferredTheme(theme) {
     modifyDOM(theme)
-
     localStorage.setItem('theme', theme)
     setMode(theme)
   }
