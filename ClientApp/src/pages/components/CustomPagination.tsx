@@ -1,4 +1,4 @@
-/* import Pagination from 'react-bootstrap/Pagination'
+import Pagination from 'react-bootstrap/Pagination'
 import { PaginationType } from 'src/types/paginationTypes'
 
 const CustomPagination = ({ dataPerPage, totalData, paginate, currentPage }: PaginationType) => {
@@ -35,4 +35,3 @@ const CustomPagination = ({ dataPerPage, totalData, paginate, currentPage }: Pag
 }
 
 export default CustomPagination
- */

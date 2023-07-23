@@ -1,6 +1,6 @@
 export type PaginationType = {
   dataPerPage: number
   totalData: number
-  paginate: void
+  paginate(pageNumber: number): void
   currentPage: number
 }
