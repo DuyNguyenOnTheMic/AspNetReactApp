@@ -6,7 +6,7 @@ import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from './components/CustomPagination'
 import ModalStudentForm from './components/ModalStudentForm'
 
-const useSortableData = (items: any, config = null) => {
+const useSortableData = (items: StudentsType[], config = null) => {
   const [sortConfig, setSortConfig] = useState<any>(config)
 
   const sortedItems = useMemo(() => {
@@ -27,10 +27,10 @@ const useSortableData = (items: any, config = null) => {
     return sortableItems
   }, [items, sortConfig])
 
-  const requestSort = (key: any) => {
-    let direction = 'ascending'
-    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending'
+  const requestSort = (key: string) => {
+    let direction = 'descending'
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'descending') {
+      direction = 'ascending'
     }
     setSortConfig({ key, direction })
   }
@@ -56,12 +56,8 @@ const StudentManagement = () => {
     setLoading(false)
   }
 
-  // Get current data
-  const indexOfLastData = currentPage * dataPerPage
-  const indexOfFirstData = indexOfLastData - dataPerPage
-  const currentData = data.slice(indexOfFirstData, indexOfLastData)
+  // Configure sortable columns
   const { items, requestSort, sortConfig } = useSortableData(data)
-  console.log(items)
   const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
       return
@@ -69,6 +65,11 @@ const StudentManagement = () => {
 
     return sortConfig.key === name ? sortConfig.direction : undefined
   }
+
+  // Get current data
+  const indexOfLastData = currentPage * dataPerPage
+  const indexOfFirstData = indexOfLastData - dataPerPage
+  const currentData = items.slice(indexOfFirstData, indexOfLastData)
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
@@ -79,13 +80,21 @@ const StudentManagement = () => {
         <Table striped hover aria-labelledby='tableLabel'>
           <thead>
             <tr>
-              <th onClick={() => requestSort('id')} className={getClassNamesFor('name')}>
+              <th className={getClassNamesFor('id')} onClick={() => requestSort('id')}>
                 Student ID
               </th>
-              <th>Student Name</th>
-              <th>Age</th>
-              <th>Course</th>
-              <th>Note</th>
+              <th className={getClassNamesFor('name')} onClick={() => requestSort('name')}>
+                Student Name
+              </th>
+              <th className={getClassNamesFor('age')} onClick={() => requestSort('age')}>
+                Age
+              </th>
+              <th className={getClassNamesFor('course')} onClick={() => requestSort('course')}>
+                Course
+              </th>
+              <th className={getClassNamesFor('note')} onClick={() => requestSort('note')}>
+                Note
+              </th>
               <th>Option</th>
             </tr>
           </thead>
