@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { FormEvent, Fragment, Reducer, useEffect, useReducer, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
@@ -143,6 +144,9 @@ const StudentManagement = () => {
               <th className={getClassNamesFor('note')} onClick={() => requestSort('note')}>
                 Note
               </th>
+              <th className={getClassNamesFor('createdDate')} onClick={() => requestSort('createdDate')}>
+                Created Date
+              </th>
               <th className='text-center no-sort'>Option</th>
             </tr>
           </thead>
@@ -155,6 +159,7 @@ const StudentManagement = () => {
                 <td>{student.age}</td>
                 <td>{student.course}</td>
                 <td>{student.note}</td>
+                <td>{moment(student.createdDate).format('DD/MM/YYYY HH:mm:ss')}</td>
                 <td className='text-center'>
                   <Button type='button' variant='warning' className='me-1' onClick={() => handleShow('edit')}>
                     Edit
