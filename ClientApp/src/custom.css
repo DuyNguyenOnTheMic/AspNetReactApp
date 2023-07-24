@@ -17,6 +17,10 @@ thead th {
   cursor: pointer;
 }
 
+thead th.no-sort {
+  cursor: auto;
+}
+
 thead th.ascending::after {
   content: '👇';
   display: inline-block;
@@ -24,7 +28,7 @@ thead th.ascending::after {
 }
 
 thead th.descending::after {
-  content: '☝️';
+  content: '👆';
   display: inline-block;
   margin-left: 1em;
 }

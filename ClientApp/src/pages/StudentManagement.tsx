@@ -107,7 +107,7 @@ const StudentManagement = () => {
         <Table striped hover responsive aria-labelledby='tableLabel'>
           <thead>
             <tr>
-              <th /* className={getClassNamesFor('id')} onClick={() => requestSort('id')} */>#</th>
+              <th className='no-sort'>#</th>
               <th className={getClassNamesFor('id')} onClick={() => requestSort('id')}>
                 Student ID
               </th>
@@ -123,7 +123,7 @@ const StudentManagement = () => {
               <th className={getClassNamesFor('note')} onClick={() => requestSort('note')}>
                 Note
               </th>
-              <th className='text-center'>Option</th>
+              <th className='text-center no-sort'>Option</th>
             </tr>
           </thead>
           <tbody>
