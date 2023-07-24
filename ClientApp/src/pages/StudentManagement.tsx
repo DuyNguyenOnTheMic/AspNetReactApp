@@ -68,7 +68,7 @@ const StudentManagement = () => {
         dispatch({ type: 'load_form' })
         break
       default:
-        break
+        throw Error('Unknown modal type: ' + modalType)
     }
 
     return setShow(true)
