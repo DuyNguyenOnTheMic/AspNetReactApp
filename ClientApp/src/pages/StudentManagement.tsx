@@ -39,20 +39,18 @@ const StudentManagement = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPerPage] = useState(10)
 
-  // Form useStates
+  // Bootstrap modal hooks
   const [state, dispatch] = useReducer<Reducer<StudentsType, IAction>, StudentsType>(
     reducer,
     initialState,
     () => initialState
   )
   const { id, name, age, course, note } = state
-
-  // Bootstrap modal useStates
   const [show, setShow] = useState<boolean>(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
 
   // Actions
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const student: StudentsType = {
@@ -136,7 +134,7 @@ const StudentManagement = () => {
                 <td>{student.course}</td>
                 <td>{student.note}</td>
                 <td className='text-center'>
-                  <Button type='button' variant='warning' className='me-1' /* onClick={() => editStudent(student)} */>
+                  <Button type='button' variant='warning' className='me-1' onClick={handleShow}>
                     Edit
                   </Button>
                   <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
