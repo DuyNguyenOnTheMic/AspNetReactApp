@@ -23,13 +23,22 @@ const initialState: StudentsType = {
 }
 
 function reducer(state: StudentsType, action: IAction) {
-  if (action.type === 'reset') {
-    return initialState
-  }
-  const result: any = { ...state }
-  result[action.type.toLocaleLowerCase()] = action.value
+  switch (action.type) {
+    case 'load_form':
+      return {
+        ...state,
+        id: 'haha',
+        name: 'hehe'
+      }
+    case 'reset':
+      return initialState
+    default: {
+      const result: any = { ...state }
+      result[action.type.toLocaleLowerCase()] = action.value
 
-  return result
+      return result
+    }
+  }
 }
 
 const StudentManagement = () => {
@@ -50,7 +59,20 @@ const StudentManagement = () => {
 
   // Actions
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  function handleShow(modalType: string) {
+    switch (modalType) {
+      case 'create':
+        dispatch({ type: 'reset' })
+        break
+      case 'edit':
+        dispatch({ type: 'load_form' })
+        break
+      default:
+        break
+    }
+
+    return setShow(true)
+  }
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const student: StudentsType = {
@@ -134,7 +156,7 @@ const StudentManagement = () => {
                 <td>{student.course}</td>
                 <td>{student.note}</td>
                 <td className='text-center'>
-                  <Button type='button' variant='warning' className='me-1' onClick={handleShow}>
+                  <Button type='button' variant='warning' className='me-1' onClick={() => handleShow('edit')}>
                     Edit
                   </Button>
                   <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
@@ -168,7 +190,7 @@ const StudentManagement = () => {
     <div>
       <h1 id='tableLabel'>Student management</h1>
       <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-        <Button type='button' variant='primary' className='me-1' onClick={handleShow}>
+        <Button type='button' variant='primary' className='me-1' onClick={() => handleShow('create')}>
           Register
         </Button>
       </div>
