@@ -107,6 +107,7 @@ const StudentManagement = () => {
         <Table striped hover responsive aria-labelledby='tableLabel'>
           <thead>
             <tr>
+              <th /* className={getClassNamesFor('id')} onClick={() => requestSort('id')} */>#</th>
               <th className={getClassNamesFor('id')} onClick={() => requestSort('id')}>
                 Student ID
               </th>
@@ -126,8 +127,9 @@ const StudentManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map(student => (
+            {students.map((student, index) => (
               <tr key={student.id}>
+                <td>{indexOfFirstData + index + 1}</td>
                 <td>{student.id} </td>
                 <td>{student.name}</td>
                 <td>{student.age}</td>

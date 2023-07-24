@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspNetReactApp.Models
 {
@@ -18,5 +19,7 @@ namespace AspNetReactApp.Models
         public required string Course { get; set; }
         [StringLength(100)]
         public string? Note { get; set; }
+        [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedDate { get; set; }
     }
 }
