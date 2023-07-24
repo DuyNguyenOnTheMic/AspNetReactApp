@@ -20,10 +20,10 @@ export class WeatherForecast extends Component {
       <Table striped hover aria-labelledby='tableLabel'>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th className='no-sort'>Date</th>
+            <th className='no-sort'>Temp. (C)</th>
+            <th className='no-sort'>Temp. (F)</th>
+            <th className='no-sort'>Summary</th>
           </tr>
         </thead>
         <tbody>
