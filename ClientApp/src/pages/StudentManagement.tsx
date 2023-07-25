@@ -45,6 +45,7 @@ const StudentManagement = () => {
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPerPage] = useState(10)
+  const [submitAction, setSubmitAction] = useState('')
 
   // Bootstrap modal hooks
   const [state, dispatch] = useReducer<Reducer<StudentsType, IAction>, StudentsType>(
@@ -68,6 +69,7 @@ const StudentManagement = () => {
       default:
         throw Error('Unknown modal type: ' + modalType)
     }
+    setSubmitAction(modalType)
 
     return setShow(true)
   }
@@ -80,7 +82,15 @@ const StudentManagement = () => {
       course: course,
       note: note
     }
-    await addStudent(student)
+    switch (submitAction) {
+      case 'create':
+        await addStudent(student)
+        break
+      case 'edit':
+        break
+      default:
+        break
+    }
     dispatch({ type: 'reset' })
     populateStudentData()
     handleClose()
