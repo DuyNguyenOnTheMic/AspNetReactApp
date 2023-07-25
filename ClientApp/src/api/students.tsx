@@ -12,9 +12,16 @@ export const fetchData = async () => {
   return response.data
 }
 
-// ** Add User
+// ** Add Student
 export const addStudent = async (data: StudentsType) => {
   const response = await axios.post(uri, data, await RequestHeader())
+
+  return response.data
+}
+
+// ** Update Student
+export const updateStudent = async (studentId: string, data: StudentsType) => {
+  const response = await axios.put(`${uri}/${studentId}`, data, await RequestHeader())
 
   return response.data
 }

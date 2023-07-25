@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table'
-import { addStudent, fetchData } from 'src/api/students'
+import { addStudent, fetchData, updateStudent } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from './components/CustomPagination'
 import useSortableData from './components/useSortableData'
@@ -45,6 +45,7 @@ const StudentManagement = () => {
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPerPage] = useState(10)
+  const [studentId, setStudentId] = useState('')
   const [submitAction, setSubmitAction] = useState('')
 
   // Bootstrap modal hooks
@@ -64,6 +65,7 @@ const StudentManagement = () => {
         dispatch({ type: 'reset' })
         break
       case 'edit':
+        setStudentId(student!.id)
         dispatch({ type: 'load_form', student })
         break
       default:
@@ -87,6 +89,7 @@ const StudentManagement = () => {
         await addStudent(student)
         break
       case 'edit':
+        await updateStudent(studentId, student)
         break
       default:
         break
