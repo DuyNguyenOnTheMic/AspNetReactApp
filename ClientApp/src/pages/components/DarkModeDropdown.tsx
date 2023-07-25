@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavDropdown } from 'react-bootstrap'
 
 const IS_SERVER = typeof window === 'undefined'
-const storedTheme = IS_SERVER ? 'light' : localStorage.getItem('theme')
+let storedTheme = IS_SERVER ? 'light' : localStorage.getItem('theme')
 
 const arrayOfThemes = [
   { name: 'Light', icon: '☀️' },
@@ -25,6 +25,13 @@ export default function DarkModeDropdown() {
   useEffect(() => {
     if (IS_SERVER) return
     modifyDOM(mode)
+
+    // Listen to the color scheme change event
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (storedTheme !== 'light' && storedTheme !== 'dark') {
+        modifyDOM(getPreferredTheme())
+      }
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -39,15 +46,9 @@ export default function DarkModeDropdown() {
   function setPreferredTheme(theme: string) {
     modifyDOM(theme)
     localStorage.setItem('theme', theme)
+    storedTheme = theme
     setMode(theme)
   }
-
-  // Listen to the color scheme change event
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if (storedTheme !== 'light' && storedTheme !== 'dark') {
-      modifyDOM(mode)
-    }
-  })
 
   return (
     <NavDropdown title={<>{arrayOfThemes.find(theme => theme.name.toLowerCase() === mode)?.icon} </>}>
