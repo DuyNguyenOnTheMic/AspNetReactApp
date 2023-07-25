@@ -13,6 +13,7 @@ import useSortableData from './components/useSortableData'
 interface IAction {
   type: string
   value?: string
+  student?: StudentsType
 }
 
 const initialState: StudentsType = {
@@ -26,11 +27,7 @@ const initialState: StudentsType = {
 function reducer(state: StudentsType, action: IAction) {
   switch (action.type) {
     case 'load_form':
-      return {
-        ...state,
-        id: 'haha',
-        name: 'hehe'
-      }
+      return action.student
     case 'reset':
       return initialState
     default: {
@@ -60,13 +57,13 @@ const StudentManagement = () => {
 
   // Actions
   const handleClose = () => setShow(false)
-  function handleShow(modalType: string) {
+  function handleShow(modalType: string, student?: StudentsType) {
     switch (modalType) {
       case 'create':
         dispatch({ type: 'reset' })
         break
       case 'edit':
-        dispatch({ type: 'load_form' })
+        dispatch({ type: 'load_form', student })
         break
       default:
         throw Error('Unknown modal type: ' + modalType)
@@ -161,7 +158,7 @@ const StudentManagement = () => {
                 <td>{student.note}</td>
                 <td>{moment(student.createdDate).format('DD/MM/YYYY HH:mm:ss')}</td>
                 <td className='text-center'>
-                  <Button type='button' variant='warning' className='me-1' onClick={() => handleShow('edit')}>
+                  <Button type='button' variant='warning' className='me-1' onClick={() => handleShow('edit', student)}>
                     Edit
                   </Button>
                   <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
