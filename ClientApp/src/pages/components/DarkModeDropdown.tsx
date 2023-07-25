@@ -42,6 +42,13 @@ export default function DarkModeDropdown() {
     setMode(theme)
   }
 
+  // Listen to the color scheme change event
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (storedTheme !== 'light' && storedTheme !== 'dark') {
+      modifyDOM(mode)
+    }
+  })
+
   return (
     <NavDropdown title={<>{arrayOfThemes.find(theme => theme.name.toLowerCase() === mode)?.icon} </>}>
       {arrayOfThemes.map(theme => {
