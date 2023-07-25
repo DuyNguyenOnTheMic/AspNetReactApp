@@ -91,8 +91,6 @@ const StudentManagement = () => {
       case 'edit':
         await updateStudent(studentId, student)
         break
-      default:
-        break
     }
     dispatch({ type: 'reset' })
     populateStudentData()
