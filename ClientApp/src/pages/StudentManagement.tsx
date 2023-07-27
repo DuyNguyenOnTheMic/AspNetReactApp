@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table'
-import { addStudent, fetchData, updateStudent } from 'src/api/students'
+import { addStudent, deleteStudent, fetchData, updateStudent } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from './components/CustomPagination'
 import useSortableData from './components/useSortableData'
@@ -56,24 +56,32 @@ const StudentManagement = () => {
   )
   const { id, name, age, course, note } = state
   const [show, setShow] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
 
   // Actions
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    setShow(false)
+    setShowDelete(false)
+  }
   const handleShow = (modalType: string, student?: StudentsType) => {
     switch (modalType) {
       case 'create':
         dispatch({ type: 'reset' })
+        setShow(true)
         break
       case 'edit':
         setStudentId(student!.id)
         dispatch({ type: 'load_form', student })
+        setShow(true)
+        break
+      case 'delete':
+        setStudentId(student!.id)
+        setShowDelete(true)
         break
       default:
         throw Error('Unknown modal type: ' + modalType)
     }
     setSubmitAction(modalType)
-
-    return setShow(true)
   }
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -90,6 +98,9 @@ const StudentManagement = () => {
         break
       case 'edit':
         await updateStudent(studentId, student)
+        break
+      case 'delete':
+        await deleteStudent(studentId)
         break
     }
     dispatch({ type: 'reset' })
@@ -172,7 +183,7 @@ const StudentManagement = () => {
                   <Button type='button' variant='warning' className='me-1' onClick={() => handleShow('edit', student)}>
                     Edit
                   </Button>
-                  <Button type='button' variant='danger' /* onClick={() => DeleteStudent(student.id)} */>
+                  <Button type='button' variant='danger' onClick={() => handleShow('delete', student)}>
                     Delete
                   </Button>
                 </td>
@@ -247,7 +258,7 @@ const StudentManagement = () => {
           </Modal.Footer>
         </Form>
       </Modal>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={showDelete} onHide={handleClose} centered>
         <Form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
             <Modal.Title>warning</Modal.Title>

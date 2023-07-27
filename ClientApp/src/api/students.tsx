@@ -28,10 +28,7 @@ export const updateStudent = async (studentId: string, data: StudentsType) => {
 
 // ** Delete Student
 export const deleteStudent = async (studentId: string) => {
-  const response = await axios.delete(uri, {
-    data: studentId,
-    ...(await RequestHeader())
-  })
+  const response = await axios.delete(`${uri}/${studentId}`, await RequestHeader())
 
   return response.data
 }
