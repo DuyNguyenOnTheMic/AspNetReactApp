@@ -184,10 +184,10 @@ const StudentManagement = () => {
                 <td>{moment(student.createdDate).format('DD/MM/YYYY HH:mm:ss')}</td>
                 <td className='text-center'>
                   <Button type='button' variant='success' className='me-1' onClick={() => handleShow('edit', student)}>
-                    ✏️ Edit
+                    Edit
                   </Button>
                   <Button type='button' variant='danger' onClick={() => handleShow('delete', student)}>
-                    🗑️ Delete
+                    Delete
                   </Button>
                 </td>
               </tr>
@@ -218,7 +218,7 @@ const StudentManagement = () => {
       <h1 id='tableLabel'>Student management</h1>
       <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
         <Button type='button' variant='primary' className='me-1' onClick={() => handleShow('create')}>
-          ➕ Register
+          Register
         </Button>
       </div>
       <Modal show={show} onHide={handleClose} centered>
