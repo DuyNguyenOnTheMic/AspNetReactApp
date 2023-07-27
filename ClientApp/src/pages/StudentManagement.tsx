@@ -55,7 +55,7 @@ const StudentManagement = () => {
     () => initialState
   )
   const { id, name, age, course, note } = state
-  const [show, setShow] = useState<boolean>(false)
+  const [show, setShow] = useState(false)
 
   // Actions
   const handleClose = () => setShow(false)
