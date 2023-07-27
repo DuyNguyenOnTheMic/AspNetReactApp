@@ -85,8 +85,8 @@ const StudentManagement = () => {
     }
     setSubmitAction(modalType)
   }
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault()
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
     const student: StudentsType = {
       id: id,
       name: name,
@@ -94,17 +94,21 @@ const StudentManagement = () => {
       course: course,
       note: note
     }
-    switch (submitAction) {
-      case 'create':
-        await addStudent(student)
-        break
-      case 'edit':
-        await updateStudent(studentId, student)
-        break
-      case 'delete':
-        await deleteStudent(studentId)
-        toast.success('Delete successfully!')
-        break
+    try {
+      switch (submitAction) {
+        case 'create':
+          await addStudent(student)
+          break
+        case 'edit':
+          await updateStudent(studentId, student)
+          break
+        case 'delete':
+          await deleteStudent(studentId)
+          toast.success('Delete successfully!')
+          break
+      }
+    } catch (error) {
+      return error
     }
     dispatch({ type: 'reset' })
     populateStudentData()
