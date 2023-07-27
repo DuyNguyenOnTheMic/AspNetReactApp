@@ -5,6 +5,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { addStudent, deleteStudent, fetchData, updateStudent } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from './components/CustomPagination'
@@ -101,6 +103,7 @@ const StudentManagement = () => {
         break
       case 'delete':
         await deleteStudent(studentId)
+        toast.success('Delete successfully!')
         break
     }
     dispatch({ type: 'reset' })
@@ -180,11 +183,11 @@ const StudentManagement = () => {
                 <td>{student.note}</td>
                 <td>{moment(student.createdDate).format('DD/MM/YYYY HH:mm:ss')}</td>
                 <td className='text-center'>
-                  <Button type='button' variant='warning' className='me-1' onClick={() => handleShow('edit', student)}>
-                    Edit
+                  <Button type='button' variant='success' className='me-1' onClick={() => handleShow('edit', student)}>
+                    ✏️ Edit
                   </Button>
                   <Button type='button' variant='danger' onClick={() => handleShow('delete', student)}>
-                    Delete
+                    🗑️ Delete
                   </Button>
                 </td>
               </tr>
@@ -215,7 +218,7 @@ const StudentManagement = () => {
       <h1 id='tableLabel'>Student management</h1>
       <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
         <Button type='button' variant='primary' className='me-1' onClick={() => handleShow('create')}>
-          Register
+          ➕ Register
         </Button>
       </div>
       <Modal show={show} onHide={handleClose} centered>
@@ -261,13 +264,11 @@ const StudentManagement = () => {
       <Modal show={showDelete} onHide={handleClose} centered>
         <Form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>warning</Modal.Title>
+            <Modal.Title>warning ⚠️</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <p>Are you sure you want to delete this student?</p>
-          </Modal.Body>
+          <Modal.Body>Are you sure you want to delete this student?</Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' type='button' onClick={handleClose}>
+            <Button variant='danger' type='button' onClick={handleClose}>
               Cancel
             </Button>
             <Button variant='primary' type='submit'>
@@ -276,6 +277,7 @@ const StudentManagement = () => {
           </Modal.Footer>
         </Form>
       </Modal>
+      <ToastContainer position='top-center' theme='colored' />
       {contents}
     </div>
   )
