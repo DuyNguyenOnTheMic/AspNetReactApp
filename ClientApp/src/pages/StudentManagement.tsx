@@ -247,6 +247,24 @@ const StudentManagement = () => {
           </Modal.Footer>
         </Form>
       </Modal>
+      <Modal show={show} onHide={handleClose} centered>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title>warning</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Are you sure you want to delete this student?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' type='button' onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant='primary' type='submit'>
+              Yes, delete it!
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
       {contents}
     </div>
   )

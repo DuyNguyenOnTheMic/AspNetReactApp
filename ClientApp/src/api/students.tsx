@@ -25,3 +25,10 @@ export const updateStudent = async (studentId: string, data: StudentsType) => {
 
   return response.data
 }
+
+// ** Delete Student
+export const deleteStudent = async (studentId: string) => {
+  const response = await axios.delete(`${uri}/${studentId}`, await RequestHeader())
+
+  return response.data
+}
