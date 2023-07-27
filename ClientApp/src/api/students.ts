@@ -14,21 +14,15 @@ export const fetchData = async () => {
 
 // ** Add Student
 export const addStudent = async (data: StudentsType) => {
-  const response = await axios.post(uri, data, await RequestHeader())
-
-  return response.data
+  await axios.post(uri, data, await RequestHeader())
 }
 
 // ** Update Student
 export const updateStudent = async (studentId: string, data: StudentsType) => {
-  const response = await axios.put(`${uri}/${studentId}`, data, await RequestHeader())
-
-  return response.data
+  await axios.put(`${uri}/${studentId}`, data, await RequestHeader())
 }
 
 // ** Delete Student
 export const deleteStudent = async (studentId: string) => {
-  const response = await axios.delete(`${uri}/${studentId}`, await RequestHeader())
-
-  return response.data
+  await axios.delete(`${uri}/${studentId}`, await RequestHeader())
 }

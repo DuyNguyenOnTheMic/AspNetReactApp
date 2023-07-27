@@ -108,6 +108,8 @@ const StudentManagement = () => {
           break
       }
     } catch (error) {
+      console.log(error)
+
       return error
     }
     dispatch({ type: 'reset' })
