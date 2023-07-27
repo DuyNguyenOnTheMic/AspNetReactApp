@@ -59,7 +59,7 @@ const StudentManagement = () => {
 
   // Actions
   const handleClose = () => setShow(false)
-  function handleShow(modalType: string, student?: StudentsType) {
+  const handleShow = (modalType: string, student?: StudentsType) => {
     switch (modalType) {
       case 'create':
         dispatch({ type: 'reset' })
