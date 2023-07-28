@@ -272,6 +272,7 @@ const StudentManagement = () => {
           <i className='bi bi-plus-circle'></i> Register
         </Button>
       </div>
+      {contents}
       <Modal show={show} onHide={handleClose} centered>
         <Form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
@@ -340,7 +341,6 @@ const StudentManagement = () => {
         </Form>
       </Modal>
       <ToastContainer theme='colored' />
-      {contents}
     </div>
   )
 }
