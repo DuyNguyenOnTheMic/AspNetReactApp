@@ -67,6 +67,8 @@ const StudentManagement = () => {
   const handleClose = () => {
     setShow(false)
     setShowDelete(false)
+    setStudentId('')
+    setSubmitAction('')
     setErrorMessage('')
   }
   const handleShow = (modalType: string, student?: StudentsType) => {
@@ -278,7 +280,14 @@ const StudentManagement = () => {
           <Modal.Body>
             <ErrorAlert />
             <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
-              <Form.Control type='text' placeholder='Student ID' value={id} onChange={onChange} autoFocus />
+              <Form.Control
+                type='text'
+                placeholder='Student ID'
+                value={id}
+                onChange={onChange}
+                autoFocus
+                disabled={studentId !== ''}
+              />
             </FloatingLabel>
             <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
               <Form.Control type='text' placeholder='Student Name' value={name} onChange={onChange} />
