@@ -108,7 +108,6 @@ const StudentManagement = () => {
           break
         case 'delete':
           await deleteStudent(studentId)
-          toast.success('Delete successfully!')
           break
       }
     } catch (error) {
@@ -150,6 +149,7 @@ const StudentManagement = () => {
 
       return false
     }
+    toast.success(`${submitAction[0].toUpperCase()}${submitAction.slice(1)} successfully`)
     dispatch({ type: 'reset' })
     populateStudentData()
     handleClose()
@@ -325,7 +325,7 @@ const StudentManagement = () => {
           </Modal.Footer>
         </Form>
       </Modal>
-      <ToastContainer position='top-center' theme='colored' />
+      <ToastContainer theme='colored' />
       {contents}
     </div>
   )
