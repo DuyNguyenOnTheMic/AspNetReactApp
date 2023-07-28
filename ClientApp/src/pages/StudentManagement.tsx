@@ -1,3 +1,4 @@
+import axios from 'axios'
 import moment from 'moment'
 import { FormEvent, Fragment, Reducer, useEffect, useReducer, useState } from 'react'
 import Button from 'react-bootstrap/Button'
@@ -24,6 +25,11 @@ const initialState: StudentsType = {
   age: Number(''),
   course: '',
   note: ''
+}
+
+interface ValidationError {
+  message: string
+  errors: Record<string, string[]>
 }
 
 function reducer(state: StudentsType, action: IAction) {
@@ -94,23 +100,40 @@ const StudentManagement = () => {
       course: course,
       note: note
     }
-    try {
-      switch (submitAction) {
-        case 'create':
+    switch (submitAction) {
+      case 'create':
+        try {
           await addStudent(student)
-          break
-        case 'edit':
-          await updateStudent(studentId, student)
-          break
-        case 'delete':
-          await deleteStudent(studentId)
-          toast.success('Delete successfully!')
-          break
-      }
-    } catch (error) {
-      console.log(error)
+        } catch (error) {
+          if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              console.log(error.response.data)
+              console.log(error.response.status)
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request)
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message)
+            }
+          } else {
+            console.error(error)
+          }
 
-      return error
+          return false
+        }
+        break
+      case 'edit':
+        await updateStudent(studentId, student)
+        break
+      case 'delete':
+        await deleteStudent(studentId)
+        toast.success('Delete successfully!')
+        break
     }
     dispatch({ type: 'reset' })
     populateStudentData()
