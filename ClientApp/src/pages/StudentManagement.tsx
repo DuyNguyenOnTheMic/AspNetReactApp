@@ -67,6 +67,7 @@ const StudentManagement = () => {
   const handleClose = () => {
     setShow(false)
     setShowDelete(false)
+    setErrorMessage('')
   }
   const handleShow = (modalType: string, student?: StudentsType) => {
     switch (modalType) {
@@ -118,6 +119,16 @@ const StudentManagement = () => {
           console.log(error.response.data)
           console.log(error.response.status)
           switch (error.response.status) {
+            case 400:
+              if (error.response.data.errors) {
+                setErrorMessage(error.response.data.title)
+              } else {
+                setErrorMessage(error.response.data.title)
+              }
+              break
+            case 404:
+              setErrorMessage(error.response.data.title)
+              break
             case 409:
               setErrorMessage('A student with this ID already exists!')
               break
@@ -300,7 +311,10 @@ const StudentManagement = () => {
           <Modal.Header closeButton>
             <Modal.Title>warning ⚠️</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Are you sure you want to delete this student?</Modal.Body>
+          <Modal.Body>
+            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+            Are you sure you want to delete this student?
+          </Modal.Body>
           <Modal.Footer>
             <Button variant='danger' type='button' onClick={handleClose}>
               Cancel
