@@ -191,6 +191,11 @@ const StudentManagement = () => {
   function renderStudentsTable(students: StudentsType[]) {
     return (
       <Fragment>
+        <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
+          <Button type='button' variant='primary' className='me-1' onClick={() => handleShow('create')}>
+            <i className='bi bi-plus-circle'></i> Register
+          </Button>
+        </div>
         <Table striped hover responsive aria-labelledby='tableLabel'>
           <thead>
             <tr>
@@ -248,12 +253,86 @@ const StudentManagement = () => {
     )
   }
 
-  const ErrorAlert = () =>
-    errorMessage && (
-      <Alert variant='danger'>
-        <i className='bi bi-exclamation-triangle-fill'></i> {errorMessage}
-      </Alert>
+  function renderStudentsModal() {
+    const ErrorAlert = () =>
+      errorMessage && (
+        <Alert variant='danger'>
+          <i className='bi bi-exclamation-triangle-fill'></i> {errorMessage}
+        </Alert>
+      )
+
+    return (
+      <Fragment>
+        <Modal show={show} onHide={handleClose} centered>
+          <Form onSubmit={handleSubmit}>
+            <Modal.Header closeButton>
+              <Modal.Title>Student Management</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ErrorAlert />
+              <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
+                <Form.Control
+                  type='text'
+                  placeholder='Student ID'
+                  value={id}
+                  onChange={onChange}
+                  autoFocus
+                  disabled={studentId !== ''}
+                />
+              </FloatingLabel>
+              <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
+                <Form.Control type='text' placeholder='Student Name' value={name} onChange={onChange} />
+              </FloatingLabel>
+              <FloatingLabel className='mb-3' controlId='Age' label='Age'>
+                <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={onChange} />
+              </FloatingLabel>
+              <FloatingLabel className='mb-3' controlId='Course' label='Course'>
+                <Form.Control type='text' placeholder='Course' value={course} onChange={onChange} />
+              </FloatingLabel>
+              <FloatingLabel controlId='Note' label='Note'>
+                <Form.Control
+                  as='textarea'
+                  placeholder='Note'
+                  style={{
+                    height: '100px'
+                  }}
+                  value={note}
+                  onChange={onChange}
+                />
+              </FloatingLabel>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant='secondary' type='button' onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant='primary' type='submit'>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
+        <Modal show={showDelete} onHide={handleClose} centered>
+          <Form onSubmit={handleSubmit}>
+            <Modal.Header closeButton>
+              <Modal.Title>warning ⚠️</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ErrorAlert />
+              Are you sure you want to delete this student?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant='danger' type='button' onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button variant='primary' type='submit'>
+                Yes, delete it!
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
+      </Fragment>
     )
+  }
 
   const contents = loading ? (
     <div className='d-flex text-primary justify-content-center align-items-center'>
@@ -261,86 +340,17 @@ const StudentManagement = () => {
       <strong>Loading...</strong>
     </div>
   ) : (
-    renderStudentsTable(currentData)
+    <Fragment>
+      {renderStudentsTable(currentData)}
+      {renderStudentsModal()}
+      <ToastContainer theme='colored' />
+    </Fragment>
   )
 
   return (
     <div>
       <h1 id='tableLabel'>Student management</h1>
-      <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-        <Button type='button' variant='primary' className='me-1' onClick={() => handleShow('create')}>
-          <i className='bi bi-plus-circle'></i> Register
-        </Button>
-      </div>
       {contents}
-      <Modal show={show} onHide={handleClose} centered>
-        <Form onSubmit={handleSubmit}>
-          <Modal.Header closeButton>
-            <Modal.Title>Student Management</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ErrorAlert />
-            <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
-              <Form.Control
-                type='text'
-                placeholder='Student ID'
-                value={id}
-                onChange={onChange}
-                autoFocus
-                disabled={studentId !== ''}
-              />
-            </FloatingLabel>
-            <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
-              <Form.Control type='text' placeholder='Student Name' value={name} onChange={onChange} />
-            </FloatingLabel>
-            <FloatingLabel className='mb-3' controlId='Age' label='Age'>
-              <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={onChange} />
-            </FloatingLabel>
-            <FloatingLabel className='mb-3' controlId='Course' label='Course'>
-              <Form.Control type='text' placeholder='Course' value={course} onChange={onChange} />
-            </FloatingLabel>
-            <FloatingLabel controlId='Note' label='Note'>
-              <Form.Control
-                as='textarea'
-                placeholder='Note'
-                style={{
-                  height: '100px'
-                }}
-                value={note}
-                onChange={onChange}
-              />
-            </FloatingLabel>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant='secondary' type='button' onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant='primary' type='submit'>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-      <Modal show={showDelete} onHide={handleClose} centered>
-        <Form onSubmit={handleSubmit}>
-          <Modal.Header closeButton>
-            <Modal.Title>warning ⚠️</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ErrorAlert />
-            Are you sure you want to delete this student?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant='danger' type='button' onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button variant='primary' type='submit'>
-              Yes, delete it!
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-      <ToastContainer theme='colored' />
     </div>
   )
 }
