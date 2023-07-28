@@ -246,6 +246,13 @@ const StudentManagement = () => {
     )
   }
 
+  const ErrorAlert = () =>
+    errorMessage && (
+      <Alert variant='danger'>
+        <i className='bi bi-exclamation-triangle-fill'></i> {errorMessage}
+      </Alert>
+    )
+
   const contents = loading ? (
     <div className='d-flex text-primary justify-content-center align-items-center'>
       <div className='spinner-border me-2' role='status' aria-hidden='true'></div>
@@ -269,7 +276,7 @@ const StudentManagement = () => {
             <Modal.Title>Student Management</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+            <ErrorAlert />
             <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
               <Form.Control type='text' placeholder='Student ID' value={id} onChange={onChange} autoFocus />
             </FloatingLabel>
@@ -310,7 +317,7 @@ const StudentManagement = () => {
             <Modal.Title>warning ⚠️</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+            <ErrorAlert />
             Are you sure you want to delete this student?
           </Modal.Body>
           <Modal.Footer>
