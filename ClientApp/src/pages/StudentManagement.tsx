@@ -1,6 +1,7 @@
 import axios from 'axios'
 import moment from 'moment'
 import { FormEvent, Fragment, Reducer, useEffect, useReducer, useState } from 'react'
+import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
@@ -27,11 +28,6 @@ const initialState: StudentsType = {
   note: ''
 }
 
-interface ValidationError {
-  message: string
-  errors: Record<string, string[]>
-}
-
 function reducer(state: StudentsType, action: IAction) {
   switch (action.type) {
     case 'load_form':
@@ -55,6 +51,7 @@ const StudentManagement = () => {
   const [dataPerPage] = useState(10)
   const [studentId, setStudentId] = useState('')
   const [submitAction, setSubmitAction] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   // Bootstrap modal hooks
   const [state, dispatch] = useReducer<Reducer<StudentsType, IAction>, StudentsType>(
@@ -114,12 +111,19 @@ const StudentManagement = () => {
           break
       }
     } catch (error) {
-      if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
+      if (axios.isAxiosError(error)) {
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           console.log(error.response.data)
           console.log(error.response.status)
+          switch (error.response.status) {
+            case 409:
+              setErrorMessage('A student with this ID already exists!')
+              break
+            default:
+              break
+          }
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -256,6 +260,7 @@ const StudentManagement = () => {
             <Modal.Title>Student Management</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
             <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
               <Form.Control type='text' placeholder='Student ID' value={id} onChange={onChange} autoFocus />
             </FloatingLabel>
