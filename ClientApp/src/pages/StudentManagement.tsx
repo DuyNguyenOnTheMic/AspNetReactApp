@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { addStudent, deleteStudent, fetchData, updateStudent } from 'src/api/students'
 import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from './components/CustomPagination'
-import useSortableData from './components/useSortableData'
+import useSortableData from './hooks/useSortableData'
 
 interface IAction {
   type: string
