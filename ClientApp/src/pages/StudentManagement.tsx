@@ -93,13 +93,7 @@ const StudentManagement = () => {
   }
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const student: StudentsType = {
-      id: id,
-      name: name,
-      age: age,
-      course: course,
-      note: note
-    }
+    const student = state
     try {
       switch (submitAction) {
         case 'create':
