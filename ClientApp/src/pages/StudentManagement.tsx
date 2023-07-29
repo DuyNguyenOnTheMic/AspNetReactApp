@@ -154,7 +154,7 @@ const StudentManagement = () => {
     populateStudentData()
     handleClose()
   }
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
     dispatch({ type: id, value })
   }
@@ -275,19 +275,19 @@ const StudentManagement = () => {
                   type='text'
                   placeholder='Student ID'
                   value={id}
-                  onChange={onChange}
+                  onChange={handleChange}
                   autoFocus
                   disabled={studentId !== ''}
                 />
               </FloatingLabel>
               <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
-                <Form.Control type='text' placeholder='Student Name' value={name} onChange={onChange} />
+                <Form.Control type='text' placeholder='Student Name' value={name} onChange={handleChange} />
               </FloatingLabel>
               <FloatingLabel className='mb-3' controlId='Age' label='Age'>
-                <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={onChange} />
+                <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={handleChange} />
               </FloatingLabel>
               <FloatingLabel className='mb-3' controlId='Course' label='Course'>
-                <Form.Control type='text' placeholder='Course' value={course} onChange={onChange} />
+                <Form.Control type='text' placeholder='Course' value={course} onChange={handleChange} />
               </FloatingLabel>
               <FloatingLabel controlId='Note' label='Note'>
                 <Form.Control
@@ -297,7 +297,7 @@ const StudentManagement = () => {
                     height: '100px'
                   }}
                   value={note}
-                  onChange={onChange}
+                  onChange={handleChange}
                 />
               </FloatingLabel>
             </Modal.Body>
