@@ -36,7 +36,7 @@ function reducer(state: StudentsType, action: IAction) {
       return initialState
     default: {
       const result: any = { ...state }
-      result[action.type.toLocaleLowerCase()] = action.value
+      result[action.type] = action.value
 
       return result
     }
@@ -264,7 +264,7 @@ const StudentManagement = () => {
             </Modal.Header>
             <Modal.Body>
               <ErrorAlert />
-              <FloatingLabel className='mb-3' controlId='Id' label='Student ID'>
+              <FloatingLabel className='mb-3' controlId='id' label='Student ID'>
                 <Form.Control
                   type='text'
                   placeholder='Student ID'
@@ -274,16 +274,16 @@ const StudentManagement = () => {
                   disabled={studentId !== ''}
                 />
               </FloatingLabel>
-              <FloatingLabel className='mb-3' controlId='Name' label='Student Name'>
+              <FloatingLabel className='mb-3' controlId='name' label='Student Name'>
                 <Form.Control type='text' placeholder='Student Name' value={name} onChange={handleChange} />
               </FloatingLabel>
-              <FloatingLabel className='mb-3' controlId='Age' label='Age'>
+              <FloatingLabel className='mb-3' controlId='age' label='Age'>
                 <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={handleChange} />
               </FloatingLabel>
-              <FloatingLabel className='mb-3' controlId='Course' label='Course'>
+              <FloatingLabel className='mb-3' controlId='course' label='Course'>
                 <Form.Control type='text' placeholder='Course' value={course} onChange={handleChange} />
               </FloatingLabel>
-              <FloatingLabel controlId='Note' label='Note'>
+              <FloatingLabel controlId='note' label='note'>
                 <Form.Control
                   as='textarea'
                   placeholder='Note'
