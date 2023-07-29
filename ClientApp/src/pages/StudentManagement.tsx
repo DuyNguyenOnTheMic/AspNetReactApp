@@ -113,10 +113,18 @@ const StudentManagement = () => {
           // that falls out of the range of 2xx
           switch (error.response.status) {
             case 400:
-              if (error.response.data.errors) {
-                setErrorMessage(error.response.data.title)
-              } else {
-                setErrorMessage(error.response.data.title)
+              {
+                const validationErrors = error.response.data.errors
+                console.log(typeof validationErrors)
+                if (validationErrors) {
+                  const errorSummary = []
+                  for (const key in validationErrors) {
+                    errorSummary.push(validationErrors[key])
+                  }
+                  setErrorMessage(errorSummary.join('\n'))
+                } else {
+                  setErrorMessage(error.response.data.title)
+                }
               }
               break
             case 404:
@@ -264,26 +272,65 @@ const StudentManagement = () => {
             </Modal.Header>
             <Modal.Body>
               <ErrorAlert />
-              <FloatingLabel className='mb-3' controlId='id' label='Student ID'>
+              <FloatingLabel
+                className='mb-3'
+                controlId='id'
+                label={
+                  <Fragment>
+                    Student ID <span className='text-danger'>*</span>
+                  </Fragment>
+                }
+              >
                 <Form.Control
                   type='text'
                   placeholder='Student ID'
                   value={id}
                   onChange={handleChange}
-                  autoFocus
                   disabled={studentId !== ''}
+                  autoFocus
+                  required
                 />
               </FloatingLabel>
-              <FloatingLabel className='mb-3' controlId='name' label='Student Name'>
-                <Form.Control type='text' placeholder='Student Name' value={name} onChange={handleChange} />
+              <FloatingLabel
+                className='mb-3'
+                controlId='name'
+                label={
+                  <Fragment>
+                    Student Name <span className='text-danger'>*</span>
+                  </Fragment>
+                }
+              >
+                <Form.Control type='text' placeholder='Student Name' value={name} onChange={handleChange} required />
               </FloatingLabel>
-              <FloatingLabel className='mb-3' controlId='age' label='Age'>
-                <Form.Control type='number' placeholder='Age' value={age > 0 ? age : ''} onChange={handleChange} />
+              <FloatingLabel
+                className='mb-3'
+                controlId='age'
+                label={
+                  <Fragment>
+                    Age <span className='text-danger'>*</span>
+                  </Fragment>
+                }
+              >
+                <Form.Control
+                  type='number'
+                  placeholder='Age'
+                  value={age > 0 ? age : ''}
+                  onChange={handleChange}
+                  required
+                />
               </FloatingLabel>
-              <FloatingLabel className='mb-3' controlId='course' label='Course'>
-                <Form.Control type='text' placeholder='Course' value={course} onChange={handleChange} />
+              <FloatingLabel
+                className='mb-3'
+                controlId='course'
+                label={
+                  <Fragment>
+                    Course <span className='text-danger'>*</span>
+                  </Fragment>
+                }
+              >
+                <Form.Control type='text' placeholder='Course' value={course} onChange={handleChange} required />
               </FloatingLabel>
-              <FloatingLabel controlId='note' label='note'>
+              <FloatingLabel controlId='note' label='Note'>
                 <Form.Control
                   as='textarea'
                   placeholder='Note'
