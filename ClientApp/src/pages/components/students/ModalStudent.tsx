@@ -6,16 +6,27 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import { StudentsType } from 'src/types/studentTypes'
 
-const ModalStudent = (
-  show: boolean,
-  showDelete: boolean,
-  handleClose: () => void,
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  handleSubmit: (e: FormEvent) => Promise<false | undefined>,
-  errorMessage: string,
-  studentId: string,
+interface ModalProps {
+  show: boolean
+  showDelete: boolean
+  handleClose: () => void
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleSubmit: (e: FormEvent) => Promise<false | undefined>
+  errorMessage: string
+  studentId: string
   state: StudentsType
-) => {
+}
+
+const ModalStudent = ({
+  show,
+  showDelete,
+  handleClose,
+  handleChange,
+  handleSubmit,
+  errorMessage,
+  studentId,
+  state
+}: ModalProps) => {
   const { id, name, age, course, note } = state
   const ErrorAlert = () =>
     errorMessage && (

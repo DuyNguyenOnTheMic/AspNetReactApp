@@ -251,10 +251,6 @@ const StudentManagement = () => {
     )
   }
 
-  function renderStudentsModal() {
-    return ModalStudent(show, showDelete, handleClose, handleChange, handleSubmit, errorMessage, studentId, state)
-  }
-
   const contents = loading ? (
     <div className='d-flex text-primary justify-content-center align-items-center'>
       <div className='spinner-border me-2' role='status' aria-hidden='true'></div>
@@ -263,7 +259,16 @@ const StudentManagement = () => {
   ) : (
     <Fragment>
       {renderStudentsTable(currentData)}
-      {renderStudentsModal()}
+      <ModalStudent
+        show={show}
+        showDelete={showDelete}
+        handleClose={handleClose}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        errorMessage={errorMessage}
+        studentId={studentId}
+        state={state}
+      />
       <ToastContainer theme='colored' />
     </Fragment>
   )
