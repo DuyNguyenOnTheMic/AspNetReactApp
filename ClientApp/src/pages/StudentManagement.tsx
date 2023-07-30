@@ -109,7 +109,6 @@ const StudentManagement = () => {
             case 400:
               {
                 const validationErrors = error.response.data.errors
-                console.log(typeof validationErrors)
                 if (validationErrors) {
                   const errorSummary = []
                   for (const key in validationErrors) {
