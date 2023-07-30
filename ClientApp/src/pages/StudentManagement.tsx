@@ -54,13 +54,6 @@ const StudentManagement = () => {
   const [showDelete, setShowDelete] = useState(false)
 
   // Actions
-  const handleClose = () => {
-    setShow(false)
-    setShowDelete(false)
-    setStudentId('')
-    setSubmitAction('')
-    setErrorMessage('')
-  }
   const handleShow = (modalType: string, student?: StudentsType) => {
     switch (modalType) {
       case 'create':
@@ -149,6 +142,13 @@ const StudentManagement = () => {
     populateStudentData()
     handleClose()
   }
+  const handleClose = () => {
+    setShow(false)
+    setShowDelete(false)
+    setStudentId('')
+    setSubmitAction('')
+    setErrorMessage('')
+  }
 
   useEffect(() => {
     populateStudentData()
@@ -172,9 +172,9 @@ const StudentManagement = () => {
       <ModalStudent
         show={show}
         showDelete={showDelete}
-        handleClose={handleClose}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        handleClose={handleClose}
         errorMessage={errorMessage}
         studentId={studentId}
         state={state}

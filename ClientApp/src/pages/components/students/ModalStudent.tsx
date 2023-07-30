@@ -9,9 +9,9 @@ import { StudentsType } from 'src/types/studentTypes'
 interface ModalProps {
   show: boolean
   showDelete: boolean
-  handleClose: () => void
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleSubmit: (e: FormEvent) => Promise<false | undefined>
+  handleClose: () => void
   errorMessage: string
   studentId: string
   state: StudentsType
