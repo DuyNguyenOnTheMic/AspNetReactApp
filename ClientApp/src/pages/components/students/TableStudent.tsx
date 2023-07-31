@@ -22,7 +22,9 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
   // Search based on filter keyword
   const lowercasedFilter = searchKey.toLowerCase()
   const filteredData = data.filter((item: any) => {
-    return Object.keys(item).some(key => item[key].toString().search(lowercasedFilter) !== -1)
+    return Object.keys(item).some(
+      key => typeof item[key] === 'string' && item[key].toLowerCase().includes(lowercasedFilter)
+    )
   })
 
   // Configure sortable columns
