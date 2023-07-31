@@ -1,8 +1,10 @@
 import moment from 'moment'
 import { Fragment, useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
 import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/esm/Form'
+import Row from 'react-bootstrap/esm/Row'
 import useSortableData from 'src/pages/hooks/useSortableData'
 import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from '../CustomPagination'
@@ -44,8 +46,8 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
 
   return (
     <Fragment>
-      <div className='d-flex justify-content-between align-items-center mx-2 row mt-75'>
-        <div className='col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start'>
+      <Row className='d-flex justify-content-between align-items-center mx-2 mt-75'>
+        <Col sm='12' lg='4' className='d-flex justify-content-center justify-content-lg-start'>
           <div className='my-2'>
             <label className='text-nowrap'>
               Hiển thị
@@ -58,8 +60,8 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
               dữ liệu
             </label>
           </div>
-        </div>
-        <div className='col-sm-12 col-lg-8 ps-xl-75 px-0'>
+        </Col>
+        <Col sm='12' lg='8' className='ps-xl-75 px-0'>
           <div className='d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap'>
             <div className='me-2'>
               <div>
@@ -72,8 +74,8 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
       <Table striped hover responsive aria-labelledby='tableLabel'>
         <thead>
           <tr>
