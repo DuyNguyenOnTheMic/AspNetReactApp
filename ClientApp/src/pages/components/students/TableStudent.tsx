@@ -17,7 +17,7 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
   const [dataPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
-  // Search bases on filter keyword
+  // Search based on filter keyword
   const lowercasedFilter = searchKey.toLowerCase()
   const filteredData = data.filter((item: any) => {
     return Object.keys(item).some(key => item[key].toString().search(lowercasedFilter) !== -1)
@@ -38,7 +38,7 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
   const indexOfFirstData = indexOfLastData - dataPerPage
   const currentData = items.slice(indexOfFirstData, indexOfLastData)
 
-  // Search and pagination functions
+  // Handle search and pagination
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchKey(e.target.value)
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
