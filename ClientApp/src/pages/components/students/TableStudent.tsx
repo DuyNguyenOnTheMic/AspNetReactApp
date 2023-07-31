@@ -42,8 +42,7 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
 
   // Handle data per page, search and pagination
   const handleDataPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value
-    setDataPerPage(Number(value))
+    setDataPerPage(Number(e.target.value))
     setCurrentPage(1)
   }
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
