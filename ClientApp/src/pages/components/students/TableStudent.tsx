@@ -57,14 +57,14 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
         <Col sm='12' lg='4' className='d-flex justify-content-center justify-content-lg-start'>
           <div className='my-2'>
             <label className='text-nowrap'>
-              Hiển thị
+              Show
               <Form.Select className='d-inline-block mx-2 w-50' onChange={handleDataPerPageChange}>
                 <option value='10'>10</option>
                 <option value='25'>25</option>
                 <option value='50'>50</option>
-                <option value={data.length}>All</option>
+                <option value='100'>100</option>
               </Form.Select>
-              dữ liệu
+              entries
             </label>
           </div>
         </Col>
