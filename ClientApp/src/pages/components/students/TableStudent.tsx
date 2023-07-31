@@ -13,11 +13,18 @@ interface TableProps {
 }
 
 const TableStudent = ({ data, handleShow }: TableProps) => {
+  const [searchKey, setSearchKey] = useState('')
   const [dataPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
+  // Search bases on filter keyword
+  const lowercasedFilter = searchKey.toLowerCase()
+  const filteredData = data.filter((item: any) => {
+    return Object.keys(item).some(key => item[key].toString().search(lowercasedFilter) !== -1)
+  })
+
   // Configure sortable columns
-  const { items, requestSort, sortConfig } = useSortableData(data)
+  const { items, requestSort, sortConfig } = useSortableData(filteredData)
   const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
       return
@@ -31,7 +38,8 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
   const indexOfFirstData = indexOfLastData - dataPerPage
   const currentData = items.slice(indexOfFirstData, indexOfLastData)
 
-  // Change page
+  // Search and pagination functions
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchKey(e.target.value)
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
   return (
@@ -55,7 +63,7 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
           <div className='d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap'>
             <div className='me-2'>
               <div>
-                <Form.Control type='search' placeholder='Search...'></Form.Control>
+                <Form.Control type='search' placeholder='Search...' onChange={handleSearch}></Form.Control>
               </div>
             </div>
             <div className='d-inline-flex mt-50'>
