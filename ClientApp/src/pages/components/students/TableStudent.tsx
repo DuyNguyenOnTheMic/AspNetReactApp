@@ -7,16 +7,16 @@ import { StudentsType } from 'src/types/studentTypes'
 import CustomPagination from '../CustomPagination'
 
 interface TableProps {
-  handleShow: (modalType: string, student?: StudentsType) => void
   data: StudentsType[]
+  handleShow: (modalType: string, student?: StudentsType) => void
 }
 
-const TableStudent = (props: TableProps) => {
+const TableStudent = ({ data, handleShow }: TableProps) => {
   const [dataPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
   // Configure sortable columns
-  const { items, requestSort, sortConfig } = useSortableData(props.data)
+  const { items, requestSort, sortConfig } = useSortableData(data)
   const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
       return
@@ -36,7 +36,7 @@ const TableStudent = (props: TableProps) => {
   return (
     <Fragment>
       <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-        <Button type='button' variant='primary' className='me-1' onClick={() => props.handleShow('create')}>
+        <Button type='button' variant='primary' className='me-1' onClick={() => handleShow('create')}>
           <i className='bi bi-plus-circle'></i> Register
         </Button>
       </div>
@@ -76,15 +76,10 @@ const TableStudent = (props: TableProps) => {
               <td>{student.note}</td>
               <td>{moment(student.createdDate).format('DD/MM/YYYY HH:mm:ss')}</td>
               <td className='text-center'>
-                <Button
-                  type='button'
-                  variant='success'
-                  className='me-1'
-                  onClick={() => props.handleShow('edit', student)}
-                >
+                <Button type='button' variant='success' className='me-1' onClick={() => handleShow('edit', student)}>
                   <i className='bi bi-pencil'></i> Edit
                 </Button>
-                <Button type='button' variant='danger' onClick={() => props.handleShow('delete', student)}>
+                <Button type='button' variant='danger' onClick={() => handleShow('delete', student)}>
                   <i className='bi bi-trash3'></i> Delete
                 </Button>
               </td>
@@ -94,7 +89,7 @@ const TableStudent = (props: TableProps) => {
       </Table>
       <CustomPagination
         dataPerPage={dataPerPage}
-        totalData={props.data.length}
+        totalData={data.length}
         paginate={paginate}
         currentPage={currentPage}
       />
