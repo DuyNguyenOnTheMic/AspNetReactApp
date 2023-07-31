@@ -123,7 +123,7 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
       </Table>
       <CustomPagination
         dataPerPage={dataPerPage}
-        totalData={data.length}
+        totalData={filteredData.length}
         paginate={paginate}
         currentPage={currentPage}
       />
