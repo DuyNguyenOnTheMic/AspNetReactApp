@@ -16,7 +16,7 @@ interface TableProps {
 
 const TableStudent = ({ data, handleShow }: TableProps) => {
   const [searchKey, setSearchKey] = useState('')
-  const [dataPerPage] = useState(10)
+  const [dataPerPage, setDataPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
   // Search based on filter keyword
@@ -40,7 +40,12 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
   const indexOfFirstData = indexOfLastData - dataPerPage
   const currentData = items.slice(indexOfFirstData, indexOfLastData)
 
-  // Handle search and pagination
+  // Handle data per page, search and pagination
+  const handleDataPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value
+    setDataPerPage(Number(value))
+    setCurrentPage(1)
+  }
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKey(e.target.value)
     setCurrentPage(1)
@@ -54,11 +59,11 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
           <div className='my-2'>
             <label className='text-nowrap'>
               Hiển thị
-              <Form.Select className='d-inline-block mx-2 w-50'>
+              <Form.Select className='d-inline-block mx-2 w-50' onChange={handleDataPerPageChange}>
                 <option value='10'>10</option>
                 <option value='25'>25</option>
                 <option value='50'>50</option>
-                <option value='-1'>tất cả</option>
+                <option value={data.length}>All</option>
               </Form.Select>
               dữ liệu
             </label>
