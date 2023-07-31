@@ -41,7 +41,10 @@ const TableStudent = ({ data, handleShow }: TableProps) => {
   const currentData = items.slice(indexOfFirstData, indexOfLastData)
 
   // Handle search and pagination
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchKey(e.target.value)
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKey(e.target.value)
+    setCurrentPage(1)
+  }
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
   return (
