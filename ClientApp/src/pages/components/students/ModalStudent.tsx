@@ -17,16 +17,8 @@ interface ModalProps {
   state: StudentsType
 }
 
-const ModalStudent = ({
-  show,
-  showDelete,
-  handleClose,
-  handleChange,
-  handleSubmit,
-  errorMessage,
-  studentId,
-  state
-}: ModalProps) => {
+const ModalStudent = (props: ModalProps) => {
+  const { show, showDelete, handleClose, handleChange, handleSubmit, errorMessage, studentId, state } = props
   const { id, name, age, course, note } = state
   const ErrorAlert = () =>
     errorMessage && (
